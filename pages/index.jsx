@@ -20,8 +20,8 @@ const Home = () => {
             exit="hidden"
             className="h1"
           >
-            Transforming Ideas <br /> Into{" "}
-            <span className="text-accent">Digital Reality</span>
+            Ruby on Rails &amp; JS <br />
+            <span className="text-accent">Full-stack</span> that ships
           </motion.h1>
 
           {/* subtitle */}
@@ -32,10 +32,20 @@ const Home = () => {
             exit="hidden"
             className="max-w-sm xl:max-w-xl mx-auto xl:mx-0 mb-10 xl:mb-16"
           >
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate,
-            exercitationem harum, quia nulla temporibus deleniti libero veniam
-            vero beatae numquam ducimus illum ab similique ipsam tempore fugit
-            quod laudantium debitis.
+            I&apos;m Ronak Bhatt — a highly experienced Ruby on Rails /
+            JavaScript full-stack developer focused on clean, efficient code.
+            With 10+ years in the stack, I build features with Ruby, Rails,
+            React, Vue, and Node — and help teams adopt modern workflows. More
+            on my work at{" "}
+            <a
+              href="https://www.ronakbhatt.in/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-accent hover:underline"
+            >
+              ronakbhatt.in
+            </a>
+            .
           </motion.p>
 
           {/* btn */}

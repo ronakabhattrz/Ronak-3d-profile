@@ -1,58 +1,72 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import CountUp from "react-countup";
+import { FaCss3, FaHtml5, FaJs, FaReact } from "react-icons/fa";
 import {
-  FaCss3,
-  FaFigma,
-  FaHtml5,
-  FaJs,
-  FaReact,
-  FaWordpress,
-} from "react-icons/fa";
-import {
-  SiAdobephotoshop,
-  SiAdobexd,
-  SiFramer,
-  SiNextdotjs,
+  SiAmazonaws,
+  SiDocker,
+  SiGraphql,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPython,
+  SiRedis,
+  SiRubyonrails,
+  SiTypescript,
+  SiVuedotjs,
 } from "react-icons/si";
 
 import Avatar from "../../components/Avatar";
 import Circles from "../../components/Circles";
 import { fadeIn } from "../../variants";
 
-//  data
 export const aboutData = [
   {
     title: "skills",
     info: [
       {
-        title: "Web Development",
+        title: "Rails, JS & frontend",
         icons: [
-          FaHtml5,
-          FaCss3,
+          SiRubyonrails,
           FaJs,
           FaReact,
-          SiNextdotjs,
-          SiFramer,
-          FaWordpress,
+          SiVuedotjs,
+          SiNodedotjs,
+          SiTypescript,
+          FaHtml5,
+          FaCss3,
+          SiPython,
         ],
       },
       {
-        title: "UI/UX Design",
-        icons: [FaFigma, SiAdobexd, SiAdobephotoshop],
+        title: "Data, APIs & DevOps",
+        icons: [
+          SiPostgresql,
+          SiRedis,
+          SiGraphql,
+          SiDocker,
+          SiAmazonaws,
+        ],
       },
     ],
   },
   {
-    title: "awards",
+    title: "certifications",
     info: [
       {
-        title: "Webby Awards - Honoree",
-        stage: "2011 - 2012",
+        title: "Upwork — Top Rated Plus Developer",
+        stage: "Freelance excellence",
       },
       {
-        title: "Adobe Design Achievement Awards - Finalist",
-        stage: "2009 - 2010",
+        title: "Ruby on Rails — professional certification",
+        stage: "Backend specialization",
+      },
+      {
+        title: "NCC (National Cadet Corps)",
+        stage: "India",
+      },
+      {
+        title: "Emmersion English Speaking — C1",
+        stage: "Professional proficiency",
       },
     ],
   },
@@ -60,16 +74,31 @@ export const aboutData = [
     title: "experience",
     info: [
       {
-        title: "UX/UI Designer - XYZ Company",
-        stage: "2012 - 2023",
+        title: "Full-stack Developer — Crowdlinker",
+        stage:
+          "Nov 2025 - Present · Toronto, ON — Rails, React, Node, Python, APIs & testing",
       },
       {
-        title: "Web Developer - ABC Agency",
-        stage: "2010 - 2012",
+        title: "Lead Software Developer — All Pro IFM",
+        stage: "Nov 2022 - Oct 2025 · Remote (USA)",
       },
       {
-        title: "Intern - DEF Corporation",
-        stage: "2008 - 2010",
+        title: "Ruby Developer — Bulletproof (Cyber Security)",
+        stage: "Jan 2022 - Nov 2022 · UK (remote)",
+      },
+      {
+        title: "Senior Engineer / Team Lead — Crest Data Systems",
+        stage:
+          "May 2021 - Jan 2022 · Ahmedabad — Python, React, scalable web apps",
+      },
+      {
+        title: "Senior Software Engineer — MainStreet (Hoist)",
+        stage: "Aug 2020 - Apr 2021 · Remote (USA) — Rails & JavaScript",
+      },
+      {
+        title: "Software Engineer — Upwork (Autoservicehaarlem)",
+        stage:
+          "Sep 2017 - Jul 2020 · Remote — Rails, JavaScript, multiple domains",
       },
     ],
   },
@@ -77,161 +106,236 @@ export const aboutData = [
     title: "credentials",
     info: [
       {
-        title: "Web Development - ABC University, LA, CA",
-        stage: "2011",
+        title:
+          "B.Tech Computer Engineering — Sal Institute of Technology & Engineering Research (GTU)",
+        stage: "2014 - 2017",
       },
       {
-        title: "Computer Science Diploma - AV Technical Institute",
-        stage: "2009",
+        title: "Diploma, Computer Science — Shree Swaminarayan Gurukul College",
+        stage: "2009 - 2013",
       },
       {
-        title: "Certified Graphic Designer - ABC Institute, Los Angeles, CA",
-        stage: "2006",
+        title: "Secondary — Diwan Ballubhai School, Ahmedabad",
+        stage: "1999 - 2009",
       },
     ],
   },
+];
+
+const stats = [
+  { end: 69, label: "Projects done" },
+  { end: 65, label: "Happy clients" },
+  { end: 8, label: "Years experience" },
+  { end: 5, label: "Certifications" },
 ];
 
 const About = () => {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="h-full bg-primary/30 py-32 text-center xl:text-left">
+    <div className="h-full min-h-0 overflow-y-auto overflow-x-hidden bg-primary/30">
       <Circles />
 
-      {/* avatar img */}
       <motion.div
         variants={fadeIn("right", 0.2)}
         initial="hidden"
         animate="show"
         exit="hidden"
-        className="hidden xl:flex absolute bottom-0 -left-[370px]"
+        className="hidden xl:flex absolute bottom-0 -left-[370px] pointer-events-none select-none"
+        aria-hidden
       >
         <Avatar />
       </motion.div>
 
-      <div className="container mx-auto h-full flex flex-col items-center xl:flex-row gap-x-6">
-        {/* text */}
-        <div className="flex-1 flex flex-col justify-center">
-          <motion.h2
-            variants={fadeIn("right", 0.2)}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 xl:py-28 pb-28 xl:pb-32 max-w-7xl">
+        <div className="flex flex-col xl:flex-row xl:items-start gap-10 xl:gap-14 xl:justify-between">
+          {/* Left: intro */}
+          <div className="flex-1 min-w-0 xl:max-w-[52%] text-center xl:text-left">
+            <motion.div
+              variants={fadeIn("right", 0.15)}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              className="mb-3 inline-flex xl:block rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-accent"
+            >
+              Lead web developer
+            </motion.div>
+
+            <motion.h2
+              variants={fadeIn("right", 0.2)}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              className="h2 mb-6 xl:mb-8"
+            >
+              About <span className="text-accent">me</span>
+            </motion.h2>
+
+            <div className="mx-auto xl:mx-0 max-w-xl xl:max-w-none space-y-5 text-[15px] sm:text-base leading-relaxed">
+              <motion.p
+                className="text-white/80 font-light"
+                variants={fadeIn("right", 0.35)}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+              >
+                Hello! I am a highly experienced Ruby on Rails / JS full-stack
+                developer with a strong focus on writing clean and efficient
+                code. With over 10 years of experience, I bring a wealth of
+                expertise to the table. If you are searching for an expert who
+                perfectly matches my skill set, look no further. I am here to
+                provide comprehensive solutions tailored to your specific
+                workflow needs and to help you integrate them with the latest
+                technologies to boost your business productivity.
+              </motion.p>
+              <motion.p
+                className="text-white/80 font-light"
+                variants={fadeIn("right", 0.4)}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+              >
+                I am a full stack developer with skills in Ruby, Ruby on Rails,
+                JavaScript, ReactJS, VueJS, and NodeJS; I build web features and
+                relevant products for businesses. In the past 15 years, I have
+                acquired teamwork, problem-solving, and exceptional communication
+                skills from coding with full-stack development colleagues around
+                the world.
+              </motion.p>
+              <motion.p
+                className="text-white/80 font-light"
+                variants={fadeIn("right", 0.45)}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+              >
+                As a creative developer, I am motivated by the rigorous, logical
+                thought processes combining software development with imagination
+                and expression. Additionally, I have extensive experience in
+                upgrading RoR in an existing application; testing and ensuring
+                all existing functions work after the upgrade. My ability to
+                review and understand existing code, and propose refactoring and
+                CI/CD, enables me to accept any challenge; and I thrive on
+                contributing to strong team chemistry.
+              </motion.p>
+              <motion.p
+                className="text-white/80 font-light"
+                variants={fadeIn("right", 0.5)}
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+              >
+                I am eager to explore exciting full-stack development
+                opportunities in startups as well as established companies that
+                think I am a good match for current roles. Please reach out if you
+                are seeking a passionate and capable web dev team member.
+              </motion.p>
+            </div>
+
+            <motion.div
+              variants={fadeIn("right", 0.55)}
+              initial="hidden"
+              animate="show"
+              className="mt-10 xl:mt-12 rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-5 sm:p-6"
+            >
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                {stats.map((s) => (
+                  <div
+                    key={s.label}
+                    className="text-center xl:text-left"
+                  >
+                    <div className="text-3xl sm:text-4xl xl:text-[2.5rem] font-extrabold text-accent tabular-nums leading-none mb-2">
+                      <CountUp start={0} end={s.end} duration={4} />
+                    </div>
+                    <div className="text-[10px] sm:text-xs uppercase tracking-wider text-white/45 leading-snug max-w-[9rem] mx-auto xl:mx-0">
+                      {s.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right: tabs + content card */}
+          <motion.div
+            variants={fadeIn("left", 0.35)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h2"
+            className="w-full xl:w-[min(100%,440px)] xl:flex-shrink-0 flex flex-col gap-4"
           >
-            Captivating <span className="text-accent">stories</span> birth
-            magnificent designs.
-          </motion.h2>
-          <motion.p
-            variants={fadeIn("right", 0.4)}
-            initial="hidden"
-            animate="show"
-            className="max-w-[500px] mx-auto xl:mx-0 mb-6 xl:mb-12 px-2 xl:px-0"
-          >
-            10 years ago, I begin freelancing as a developer. Since then, I've
-            done remote work for agencies, consulted for startups, and
-            collabrated on digital products for business and consumer use.
-          </motion.p>
+            <div
+              className="flex flex-wrap justify-center xl:justify-start gap-2"
+              role="tablist"
+              aria-label="About sections"
+            >
+              {aboutData.map((item, itemI) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === itemI}
+                  className={`rounded-full px-3.5 py-2 text-xs sm:text-sm font-medium capitalize transition-all duration-300 border ${
+                    index === itemI
+                      ? "border-accent bg-accent/15 text-accent shadow-[0_0_20px_rgba(241,48,36,0.15)]"
+                      : "border-white/15 bg-white/[0.04] text-white/65 hover:border-white/25 hover:text-white/90"
+                  }`}
+                  onClick={() => setIndex(itemI)}
+                >
+                  {item.title}
+                </button>
+              ))}
+            </div>
 
-          {/* counters */}
-          <motion.div
-            variants={fadeIn("right", 0.6)}
-            initial="hidden"
-            animate="show"
-            className="hidden md:flex md:max-w-xl xl:max-w-none mx-auto xl:mx-0 mb-8"
-          >
-            <div className="flex flex-1 xl:gap-x-6">
-              {/* experience */}
-              <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
-                  <CountUp start={0} end={10} duration={5} />
-                </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
-                  Years of experience.
-                </div>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm shadow-[0_8px_40px_rgba(0,0,0,0.25)] flex flex-col min-h-[280px] max-h-[min(520px,calc(100vh-12rem))] xl:max-h-[min(580px,calc(100vh-10rem))]">
+              <div className="px-4 sm:px-5 py-3 border-b border-white/10 shrink-0">
+                <h3 className="text-sm font-semibold text-white/90 capitalize tracking-wide">
+                  {aboutData[index].title}
+                </h3>
               </div>
-
-              {/* clients */}
-              <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
-                  <CountUp start={0} end={250} duration={5} />
-                </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
-                  Satisfied clients.
-                </div>
-              </div>
-
-              {/* projects */}
-              <div className="relative flex-1 after:w-[1px] after:h-full after:bg-white/10 after:absolute after:top-0 after:right-0">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
-                  <CountUp start={0} end={650} duration={5} />
-                </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
-                  Finished projects.
-                </div>
-              </div>
-
-              {/* awards */}
-              <div className="relative flex-1">
-                <div className="text-2xl xl:text-4xl font-extrabold text-accent mb-2">
-                  <CountUp start={0} end={8} duration={5} />
-                </div>
-                <div className="text-xs uppercase tracking-[1px] leading-[1.4] max-w-[100px]">
-                  Winning awards.
-                </div>
+              <div className="about-scroll overflow-y-auto overflow-x-hidden p-4 sm:p-5 flex-1 min-h-0">
+                <ul className="space-y-0 divide-y divide-white/10">
+                  {aboutData[index].info.map((item, itemI) => (
+                    <li
+                      key={itemI}
+                      className="py-4 first:pt-0 last:pb-0 text-center xl:text-left"
+                    >
+                      {item.icons ? (
+                        <>
+                          <p className="text-sm font-medium text-white/90 mb-3">
+                            {item.title}
+                          </p>
+                          <div className="flex flex-wrap justify-center xl:justify-start gap-3">
+                            {item.icons.map((Icon, iconI) => (
+                              <span
+                                key={iconI}
+                                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-xl text-white hover:border-accent/40 hover:text-accent transition-colors"
+                                title=""
+                              >
+                                <Icon aria-hidden />
+                              </span>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-sm font-medium text-white/90 leading-snug mb-1.5">
+                            {item.title}
+                          </p>
+                          <p className="text-xs sm:text-sm text-white/50 leading-relaxed">
+                            {item.stage}
+                          </p>
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </motion.div>
         </div>
-
-        {/* info */}
-        <motion.div
-          variants={fadeIn("left", 0.4)}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          className="flex flex-col w-full xl:max-w-[48%] h-[480px]"
-        >
-          <div className="flex gap-x-4 xl:gap-x-8 mx-auto xl:mx-0 mb-4">
-            {aboutData.map((item, itemI) => (
-              <div
-                key={itemI}
-                className={`${
-                  index === itemI &&
-                  "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                } cursor-pointer capitalize xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
-                onClick={() => setIndex(itemI)}
-              >
-                {item.title}
-              </div>
-            ))}
-          </div>
-
-          <div className="py-2 xl:py-6 flex flex-col gap-y-2 xl:gap-y-4 items-center xl:items-start">
-            {aboutData[index].info.map((item, itemI) => (
-              <div
-                key={itemI}
-                className="flex-1 flex flex-col md:flex-row max-w-max gap-x-2 items-center text-center text-white/60"
-              >
-                {/* title */}
-                <div className="font-light mb-2 md:mb-0">{item.title}</div>
-                <div className="hidden md:flex">-</div>
-                <div>{item.stage}</div>
-
-                <div className="flex gap-x-4">
-                  {/* icons */}
-                  {item.icons?.map((Icon, iconI) => (
-                    <div key={iconI} className="text-2xl text-white">
-                      <Icon />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
+
     </div>
   );
 };

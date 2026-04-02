@@ -48,4 +48,21 @@
   .textarea {
     @apply w-full h-[180px] p-6 rounded-lg resize-none;
   }
+
+  /* About page: scrollable credential panel */
+  .about-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(241, 48, 36, 0.45) rgba(255, 255, 255, 0.06);
+  }
+  .about-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .about-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+  }
+  .about-scroll::-webkit-scrollbar-thumb {
+    background: rgba(241, 48, 36, 0.45);
+    border-radius: 6px;
+  }
 }

@@ -22,7 +22,7 @@ const Services = () => {
               exit="hidden"
               className="h2 xl:mt-8"
             >
-              My services <span className="text-accent">.</span>
+              What I&apos;m <span className="text-accent">doing</span>
             </motion.h2>
             <motion.p
               variants={fadeIn("up", 0.4)}
@@ -31,8 +31,17 @@ const Services = () => {
               exit="hidden"
               className="mb-4 max-w-[400px] mx-auto lg:mx-0"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-              tempora eligendi, quisquam tempore sint reiciendis.
+              A snapshot of how I help teams and products — in line with my main
+              site at{" "}
+              <a
+                href="https://www.ronakbhatt.in/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-accent hover:underline"
+              >
+                ronakbhatt.in
+              </a>
+              .
             </motion.p>
           </div>
 

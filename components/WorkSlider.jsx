@@ -1,126 +1,94 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
-import { Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
+import { ASSET } from "../lib/site";
 
-const workSlides = {
-  slides: [
-    {
-      images: [
-        {
-          title: "title",
-          path: "/thumb1.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb2.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb3.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb4.jpg",
-          link: "http://example.com",
-        },
-      ],
-    },
-    {
-      images: [
-        {
-          title: "title",
-          path: "/thumb4.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb1.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb2.jpg",
-          link: "http://example.com",
-        },
-        {
-          title: "title",
-          path: "/thumb3.jpg",
-          link: "http://example.com",
-        },
-      ],
-    },
-  ],
-};
+const base = ASSET;
+
+/** All portfolio items on one page (live sites + hub links) */
+const portfolioItems = [
+  {
+    title: "All Pro IFM",
+    path: `${base}/project-3.jpg`,
+    link: "https://allproifm.com/",
+  },
+  {
+    title: "Jager Lodge",
+    path: `${base}/project-7.png`,
+    link: "https://jagerlodge.at/",
+  },
+  {
+    title: "Bulletproof Cyber Security",
+    path: `${base}/project-4.png`,
+    link: "https://www.bulletproof.co.uk/",
+  },
+  {
+    title: "NSoJ",
+    path: `${base}/project-6.png`,
+    link: "https://www.nsoj.in/",
+  },
+  {
+    title: "Pit Stop USA",
+    path: `${base}/project-8.jpg`,
+    link: "https://pitstopusa.com/",
+  },
+  {
+    title: "Nav Eco",
+    path: `${base}/project-9.png`,
+    link: "https://www.nav-eco.fr/en",
+  },
+  {
+    title: "Auto Service Haarlem",
+    path: `${base}/project-1.jpg`,
+    link: "https://autoservicehaarlem.nl/",
+  }
+];
 
 const WorkSlider = () => {
   return (
-    <Swiper
-      spaceBetween={10}
-      pagination={{
-        clickable: true,
-      }}
-      modules={[Pagination]}
-      className="h-[280px] sm:h-[480px]"
-    >
-      {workSlides.slides.map((slide, i) => (
-        <SwiperSlide key={i}>
-          <div className="grid grid-cols-2 grid-rows-2 gap-4">
-            {slide.images.map((image, imageI) => (
-              <div
-                className="relative rounded-lg overflow-hidden flex items-center justify-center group"
-                key={imageI}
+    <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-full">
+      {portfolioItems.map((image, i) => (
+        <div
+          className="w-full rounded-xl sm:rounded-2xl bg-white/[0.04] shadow-xl ring-1 ring-white/15 p-2.5 sm:p-3 md:p-4"
+          key={`${image.title}-${i}`}
+        >
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[5/3] rounded-lg overflow-hidden bg-black/20 group">
+            <Image
+              src={image.path}
+              alt={image.title}
+              fill
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+              sizes="(max-width: 640px) 48vw, (max-width: 1536px) 46vw, 560px"
+            />
+
+            <div
+              className="absolute inset-0 bg-gradient-to-l from-transparent via-[#e838cc]/90 to-[#4a22bd]/90 opacity-0 group-hover:opacity-90 transition-all duration-500 pointer-events-none"
+              aria-hidden
+            />
+
+            <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+              <Link
+                href={image.link}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="flex items-center justify-center gap-x-2 sm:gap-x-3 text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.15em] text-white font-semibold drop-shadow-md"
               >
-                <div className="flex items-center justify-center relative overflow-hidden group">
-                  {/* image */}
-                  <Image
-                    src={image.path}
-                    alt={image.title}
-                    width={500}
-                    height={300}
-                  />
+                <span>LIVE</span>
+                <span>PROJECT</span>
+                <BsArrowRight className="text-xl sm:text-2xl shrink-0" aria-hidden />
+              </Link>
+            </div>
 
-                  {/* overlay gradient */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-l from-transparent via-[#e838cc] to-[#4a22bd] opacity-0 group-hover:opacity-80 transition-all duration-700"
-                    aria-hidden
-                  />
-
-                  {/* title */}
-                  <div className="absolute bottom-0 translate-y-full group-hover:-translate-y-10 group-hover:xl:-translate-y-20 transition-all duration-300">
-                    <Link
-                      href={image.link}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="flex items-center gap-x-2 text-[13px] tracking-[0.2em]"
-                    >
-                      {/* title part 1 */}
-                      <div className="delay-100">LIVE</div>
-                      {/* title part 2 */}
-                      <div className="translate-y-[500%] group-hover:translate-y-0 transition-all duration-300 delay-150">
-                        PROJECT
-                      </div>
-                      {/* icon */}
-                      <div className="text-xl translate-y-[500%] group-hover:translate-y-0 transition-all duration-300 delay-150">
-                        <BsArrowRight aria-hidden />
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <div className="absolute top-2 left-2 right-2 sm:top-3 sm:left-3 sm:right-3 pointer-events-none">
+              <p className="text-xs sm:text-sm font-semibold text-white drop-shadow-md line-clamp-2 opacity-95 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                {image.title}
+              </p>
+            </div>
           </div>
-        </SwiperSlide>
+        </div>
       ))}
-    </Swiper>
+    </div>
   );
 };
 
