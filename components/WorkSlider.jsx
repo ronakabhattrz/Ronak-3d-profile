@@ -1,92 +1,98 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BsArrowRight } from "react-icons/bs";
+import { BsArrowUpRight } from "react-icons/bs";
 
-import { ASSET } from "../lib/site";
-
-const base = ASSET;
-
-/** All portfolio items on one page (live sites + hub links) */
+/**
+ * Thumbnails: add files under /public/projects/ (see path per item).
+ */
 const portfolioItems = [
   {
     title: "All Pro IFM",
-    path: `${base}/project-3.jpg`,
+    path: "/projects/all-pro-ifm.jpg",
     link: "https://allproifm.com/",
   },
   {
     title: "Jager Lodge",
-    path: `${base}/project-7.png`,
+    path: "/projects/jager-lodge.png",
     link: "https://jagerlodge.at/",
   },
   {
     title: "Bulletproof Cyber Security",
-    path: `${base}/project-4.png`,
+    path: "/projects/bulletproof.png",
     link: "https://www.bulletproof.co.uk/",
   },
   {
     title: "NSoJ",
-    path: `${base}/project-6.png`,
+    path: "/projects/nsoj.png",
     link: "https://www.nsoj.in/",
   },
   {
     title: "Pit Stop USA",
-    path: `${base}/project-8.jpg`,
+    path: "/projects/pit-stop-usa.jpg",
     link: "https://pitstopusa.com/",
   },
   {
     title: "Nav Eco",
-    path: `${base}/project-9.png`,
+    path: "/projects/nav-eco.png",
     link: "https://www.nav-eco.fr/en",
   },
   {
     title: "Auto Service Haarlem",
-    path: `${base}/project-1.jpg`,
+    path: "/projects/auto-service-haarlem.jpg",
     link: "https://autoservicehaarlem.nl/",
-  }
+  },
 ];
 
 const WorkSlider = () => {
   return (
-    <div className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-full">
-      {portfolioItems.map((image, i) => (
-        <div
-          className="w-full rounded-xl sm:rounded-2xl bg-white/[0.04] shadow-xl ring-1 ring-white/15 p-2.5 sm:p-3 md:p-4"
-          key={`${image.title}-${i}`}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 w-full">
+      {portfolioItems.map((image) => (
+        <article
+          key={image.title}
+          className="group flex flex-col rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] shadow-lg shadow-black/20 ring-1 ring-white/5 overflow-hidden transition-all duration-300 hover:border-accent/35 hover:shadow-[0_0_28px_rgba(241,48,36,0.1)]"
         >
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[5/3] rounded-lg overflow-hidden bg-black/20 group">
+          <Link
+            href={image.link}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="relative block w-full aspect-[16/11] lg:aspect-[4/3] overflow-hidden bg-black/25 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
+          >
             <Image
               src={image.path}
               alt={image.title}
               fill
               className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-              sizes="(max-width: 640px) 48vw, (max-width: 1536px) 46vw, 560px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
-
             <div
-              className="absolute inset-0 bg-gradient-to-l from-transparent via-[#e838cc]/90 to-[#4a22bd]/90 opacity-0 group-hover:opacity-90 transition-all duration-500 pointer-events-none"
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 sm:opacity-60 group-hover:opacity-90 transition-opacity"
               aria-hidden
             />
-
-            <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-              <Link
-                href={image.link}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex items-center justify-center gap-x-2 sm:gap-x-3 text-xs sm:text-sm tracking-[0.12em] sm:tracking-[0.15em] text-white font-semibold drop-shadow-md"
-              >
-                <span>LIVE</span>
-                <span>PROJECT</span>
-                <BsArrowRight className="text-xl sm:text-2xl shrink-0" aria-hidden />
-              </Link>
-            </div>
-
-            <div className="absolute top-2 left-2 right-2 sm:top-3 sm:left-3 sm:right-3 pointer-events-none">
-              <p className="text-xs sm:text-sm font-semibold text-white drop-shadow-md line-clamp-2 opacity-95 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+            <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-3.5 xl:p-4 flex items-end justify-between gap-2 sm:gap-3">
+              <h3 className="text-sm sm:text-base lg:text-sm xl:text-base font-semibold text-white leading-tight drop-shadow-sm line-clamp-2 pr-1">
                 {image.title}
-              </p>
+              </h3>
+              <span
+                className="inline-flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:border-accent/50 group-hover:bg-accent/15 group-hover:text-accent"
+                aria-hidden
+              >
+                <BsArrowUpRight className="text-base sm:text-lg" />
+              </span>
             </div>
+          </Link>
+
+          <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-t border-white/10 bg-black/20">
+            <Link
+              href={image.link}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-xs sm:text-sm font-medium text-accent/90 hover:text-accent transition-colors inline-flex items-center gap-1.5"
+            >
+              Visit live site
+              <BsArrowUpRight className="text-sm opacity-80" aria-hidden />
+            </Link>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   );

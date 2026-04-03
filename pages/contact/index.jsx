@@ -50,7 +50,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="h-full bg-primary/30">
+    <div className="min-h-full bg-primary/30">
       <div className="container mx-auto py-24 xl:py-32 text-center xl:text-left">
         <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 max-w-6xl mx-auto items-start justify-center">
           <div className="flex-1 w-full max-w-[700px] mx-auto xl:mx-0">
@@ -86,7 +86,7 @@ const Contact = () => {
                   +1 (817) 947-5211
                 </a>
               </p>
-              <p>Ahmedabad, Gujarat, India</p>
+              <p>London, Ontario, Canada</p>
               <p>
                 <a
                   href={siteMeta.resumeUrl}
@@ -107,14 +107,14 @@ const Contact = () => {
               className="mb-10 rounded-lg overflow-hidden border border-white/10 aspect-[4/3] max-h-[280px] w-full"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1293.2179044765537!2d72.60228228016206!3d23.002012688884378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sin!4v1720529801638!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93245.63184717782!2d-81.32895606875188!3d42.98632343104216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef20eaee30000%3A0x4030ebaa8223060!2sLondon%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sca!4v1738281600000!5m2!1sen!2sca"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: "260px" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ronak Bhatt — location map"
+                title="London, Ontario, Canada — map"
               />
             </motion.div>
           </div>

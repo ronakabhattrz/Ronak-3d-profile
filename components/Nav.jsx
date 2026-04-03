@@ -9,14 +9,15 @@ import {
   HiRectangleGroup,
   HiChatBubbleBottomCenterText,
   HiEnvelope,
+  HiNewspaper,
 } from "react-icons/hi2";
 
-// nav data
 export const navData = [
   { name: "home", path: "/", Icon: HiHome },
   { name: "about", path: "/about", Icon: HiUser },
   { name: "services", path: "/services", Icon: HiRectangleGroup },
   { name: "work", path: "/work", Icon: HiViewColumns },
+  { name: "blog", path: "/blog", Icon: HiNewspaper },
   {
     name: "testimonials",
     path: "/testimonials",
@@ -33,8 +34,11 @@ const Nav = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-col items-center xl:justify-center gap-y-4 fixed h-max bottom-0 mt-auto xl:right-[2%] z-50 top-0 w-full xl:w-16 xl:max-w-md xl:h-screen">
-      <div className="flex w-full xl:flex-col items-center justify-between xl:justify-center gap-y-10 px-4 md:px-40 xl:px-0 h-[80px] xl:h-max py-8 bg-white/10 backdrop-blur-sm text-3xl xl:text-xl xl:rounded-full">
+    <nav
+      className="flex flex-col items-center justify-end xl:justify-center gap-y-4 fixed z-50 w-full inset-x-0 bottom-0 top-auto h-auto xl:inset-x-auto xl:right-[2%] xl:top-0 xl:bottom-0 xl:w-16 xl:max-w-md xl:h-screen pointer-events-none xl:pointer-events-auto"
+      aria-label="Primary"
+    >
+      <div className="pointer-events-auto flex w-full xl:flex-col items-center justify-between xl:justify-center gap-y-10 px-4 md:px-40 xl:px-0 min-h-[72px] sm:min-h-[80px] xl:h-max py-3 sm:py-4 xl:py-8 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] xl:pb-8 bg-white/10 backdrop-blur-md border-t border-white/[0.08] xl:border-t-0 text-3xl xl:text-xl xl:rounded-full">
         {navData.map((link, i) => (
           <Link
             className={`${
@@ -43,7 +47,6 @@ const Nav = () => {
             href={link.path}
             key={i}
           >
-            {/* tolltip */}
             <div
               role="tooltip"
               className="absolute pr-14 right-0 hidden xl:group-hover:flex"
@@ -53,7 +56,6 @@ const Nav = () => {
                   {link.name}
                 </div>
 
-                {/* triangle */}
                 <div
                   className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2"
                   aria-hidden
@@ -61,7 +63,6 @@ const Nav = () => {
               </div>
             </div>
 
-            {/* icon */}
             <div>
               <link.Icon aria-hidden />
             </div>

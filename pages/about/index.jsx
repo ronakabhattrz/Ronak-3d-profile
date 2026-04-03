@@ -133,7 +133,7 @@ const About = () => {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="h-full min-h-0 overflow-y-auto overflow-x-hidden bg-primary/30">
+    <div className="min-h-full overflow-x-hidden bg-primary/30">
       <Circles />
 
       <motion.div
@@ -141,13 +141,13 @@ const About = () => {
         initial="hidden"
         animate="show"
         exit="hidden"
-        className="hidden xl:flex absolute bottom-0 -left-[370px] pointer-events-none select-none"
+        className="hidden xl:flex absolute bottom-0 -left-[320px] pointer-events-none select-none"
         aria-hidden
       >
         <Avatar />
       </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 xl:py-28 pb-28 xl:pb-32 max-w-7xl">
+      <div className="container mx-auto max-w-7xl px-4 pt-28 pb-20 sm:px-6 sm:pt-24 sm:pb-28 lg:px-8 xl:pt-28 xl:pb-32">
         <div className="flex flex-col xl:flex-row xl:items-start gap-10 xl:gap-14 xl:justify-between">
           {/* Left: intro */}
           <div className="flex-1 min-w-0 xl:max-w-[52%] text-center xl:text-left">
@@ -158,7 +158,7 @@ const About = () => {
               exit="hidden"
               className="mb-3 inline-flex xl:block rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-accent"
             >
-              Lead web developer
+              Web Development Expert 🚀
             </motion.div>
 
             <motion.h2

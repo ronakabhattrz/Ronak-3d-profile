@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { siteMeta } from "../lib/site";
 import {
   RiFacebookCircleLine,
   RiGithubLine,
@@ -7,6 +8,7 @@ import {
   RiInstagramLine,
   RiLinkedinLine,
   RiMailLine,
+  RiMediumLine,
   RiTwitterXLine,
   RiYoutubeLine,
 } from "react-icons/ri";
@@ -23,6 +25,13 @@ export const socialData = [
     name: "GitHub",
     link: "https://github.com/ronakabhattrz",
     Icon: RiGithubLine,
+    highlight: false,
+    kind: "external",
+  },
+  {
+    name: "Medium",
+    link: siteMeta.mediumUrl,
+    Icon: RiMediumLine,
     highlight: false,
     kind: "external",
   },
@@ -44,20 +53,6 @@ export const socialData = [
     name: "Facebook",
     link: "https://www.facebook.com/RonakbhattRz",
     Icon: RiFacebookCircleLine,
-    highlight: false,
-    kind: "external",
-  },
-  {
-    name: "YouTube",
-    link: "https://www.youtube.com/channel/UC_jKbr7ACXE7LsuDoLaCJcw",
-    Icon: RiYoutubeLine,
-    highlight: false,
-    kind: "external",
-  },
-  {
-    name: "Website",
-    link: "https://www.ronakbhatt.in/",
-    Icon: RiGlobalLine,
     highlight: false,
     kind: "external",
   },

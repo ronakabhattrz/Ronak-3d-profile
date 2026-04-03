@@ -2,48 +2,53 @@ import { motion } from "framer-motion";
 
 import Bulb from "../../components/Bulb";
 import Circles from "../../components/Circles";
+import UpworkProjectCatalog from "../../components/UpworkProjectCatalog";
 import WorkSlider from "../../components/WorkSlider";
 import { fadeIn } from "../../variants";
 
 const Work = () => {
   return (
-    <div className="h-full min-h-0 overflow-y-auto overflow-x-hidden bg-primary/30 py-24 sm:py-28 xl:py-32 pb-32">
+    <div className="work-page-scroll relative z-0 min-h-full overflow-x-hidden bg-primary/30">
       <Circles />
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col xl:flex-row xl:items-start gap-8 xl:gap-12">
-          {/* text */}
-          <div className="text-center flex xl:w-[min(280px,28vw)] flex-shrink-0 flex-col lg:text-left mb-4 xl:mb-0">
-            <motion.h2
-              variants={fadeIn("up", 0.2)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="h2 xl:mt-12"
-            >
-              My work <span className="text-accent">.</span>
-            </motion.h2>
-            <motion.p
-              variants={fadeIn("up", 0.4)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="mb-4 max-w-[400px] mx-auto lg:mx-0"
-            >
-              All Major Projects I have worked on.
-            </motion.p>
-          </div>
-
-          {/* slider */}
-          <motion.div
-            variants={fadeIn("down", 0.6)}
+      <div className="container mx-auto px-4 pt-32 pb-28 sm:px-6 sm:pt-24 sm:pb-32 lg:px-8 xl:pt-28 xl:pb-36">
+        <header className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 xl:mx-0 xl:text-left">
+          <motion.h2
+            variants={fadeIn("up", 0.2)}
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="w-full flex-1 min-w-0 xl:max-w-none"
+            className="h2 mb-3 sm:mb-4"
           >
-            <WorkSlider />
-          </motion.div>
+            Selected <span className="text-accent">work</span>
+          </motion.h2>
+          <motion.p
+            variants={fadeIn("up", 0.35)}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            className="text-sm sm:text-base leading-relaxed text-white/65"
+          >
+            Start with the Upwork project catalog for predefined packages, then
+            browse major sites and products I&apos;ve shipped.
+          </motion.p>
+        </header>
+
+        <div className="mx-auto max-w-5xl xl:mx-0 xl:max-w-none">
+          <UpworkProjectCatalog isFirst />
         </div>
+
+        <motion.div
+          variants={fadeIn("up", 0.45)}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          className="mx-auto mt-16 w-full max-w-5xl border-t border-white/10 pt-12 sm:mt-20 sm:pt-14 xl:mx-0 xl:mt-24 xl:max-w-none"
+        >
+          <h3 className="mb-6 text-center text-xl font-semibold sm:mb-8 sm:text-2xl xl:text-left">
+            Major <span className="text-accent">projects</span>
+          </h3>
+          <WorkSlider />
+        </motion.div>
       </div>
       <Bulb />
     </div>
