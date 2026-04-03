@@ -3,6 +3,8 @@ import Script from "next/script";
 import { useRouter } from "next/router";
 
 import Layout from "../components/Layout";
+/** Vercel Web Analytics — Pages Router: see README “Vercel Web Analytics — Get Started”. */
+import VercelAnalytics from "../components/VercelAnalytics";
 import { siteMeta } from "../lib/site";
 
 import "../styles/globals.css";
@@ -44,6 +46,7 @@ function MyApp({ Component, pageProps }) {
           </motion.div>
         </AnimatePresence>
       </Layout>
+      <VercelAnalytics />
     </>
   );
 }

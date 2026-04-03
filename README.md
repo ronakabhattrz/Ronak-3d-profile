@@ -16,7 +16,7 @@ Live site: [ronakbhatt.in](https://www.ronakbhatt.in/)
 - **Testimonials** — Swiper-based slider.
 - **Contact** — Form via [Formspree](https://formspree.io/) (endpoint id in `lib/site.js`).
 - **SEO & link previews** — Per-route titles, descriptions, and **canonical URLs** via **`lib/seo.js`** and **`components/Layout.jsx`** (uses `useRouter().pathname`). **Open Graph** and **Twitter/X** cards include `og:image` dimensions, alt text, `og:site_name`, `og:locale`, and `twitter:site` / `twitter:creator`. **JSON-LD** for `Person` and `WebSite` in `lib/site.js`. **`pages/_document.jsx`** sets `lang="en-CA"`, favicon, and Apple touch icon. Default share image: **`/public/og-preview.png`** (ideally 1200×630); dimensions are declared in `lib/seo.js`.
-- **Analytics** — Google Analytics 4 and Hotjar IDs configured in `lib/site.js` (loaded in `pages/_app.jsx`).
+- **Analytics** — [Vercel Web Analytics](https://vercel.com/docs/analytics) is wired per **[Vercel Web Analytics — Get Started](#vercel-web-analytics--get-started)** below. Google Analytics 4 and Hotjar are still in `lib/site.js` / `_app.jsx`.
 
 ---
 
@@ -85,13 +85,40 @@ Open [http://localhost:3000](http://localhost:3000).
 - **Images:** Remote images (e.g. Cloudinary) are allow-listed in **`next.config.js`** under `images.remotePatterns`.  
 - After changing SEO or the OG image, re-validate with [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) or [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) once deployed.
 
+### Vercel Web Analytics — Get Started
+
+To start counting visitors and page views ([full docs](https://vercel.com/docs/analytics/quickstart)):
+
+1. **Install the package** (already listed in `package.json`):
+
+   ```bash
+   npm i @vercel/analytics
+   ```
+
+2. **Add the React component**  
+   Vercel’s Next.js snippet uses:
+
+   ```tsx
+   import { Analytics } from "@vercel/analytics/next";
+   ```
+
+   That import targets the **App Router** (`app/layout.tsx` and `next/navigation`). **This repo uses the Pages Router**, so the equivalent is already in place:
+
+   - **`components/VercelAnalytics.jsx`** — uses `Analytics` from **`@vercel/analytics/react`** plus **`next/router`** so each navigation sends a page view.
+   - **`pages/_app.jsx`** — renders **`<VercelAnalytics />`** next to **`Layout`**.
+
+   If you migrate to the App Router later, you can switch to **`@vercel/analytics/next`** in `app/layout.tsx` and remove **`VercelAnalytics`**.
+
+3. **Deploy and visit the site**  
+   In the Vercel dashboard, enable **Web Analytics** for the project, deploy, then open the live URL and move between pages. If you don’t see data after ~30 seconds, disable content blockers and try again.
+
 ---
 
 ## Project structure
 
 ```text
 3d-modern-portfolio/
-├── components/          # UI (Layout + Head/SEO wiring, Nav, Header, sliders, catalog, …)
+├── components/          # UI (Layout, VercelAnalytics, Nav, Header, sliders, catalog, …)
 ├── data/                # Static data (e.g. Upwork catalog)
 ├── lib/
 │   ├── site.js          # SITE_URL, siteMeta, JSON-LD, analytics IDs
