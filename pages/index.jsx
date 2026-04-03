@@ -26,7 +26,7 @@ const Home = () => {
         className="pointer-events-none absolute inset-0 max-xl:block xl:hidden bg-explosion bg-cover bg-[center_30%] bg-no-repeat opacity-[0.28] mix-blend-color-dodge"
       />
       <div className="relative z-10 min-h-full w-full">
-        <div className="container mx-auto flex min-h-[calc(100dvh-5.5rem)] max-xl:min-h-[calc(100dvh-10.5rem)] flex-col justify-center gap-6 px-4 py-8 text-center sm:gap-8 sm:px-6 sm:py-10 xl:gap-8 xl:py-12 xl:text-left">
+        <div className="container mx-auto flex min-h-[calc(100dvh-5.5rem)] max-xl:min-h-[calc(100dvh-10.5rem)] flex-col justify-center gap-6 px-4 pt-28 pb-8 text-center sm:gap-8 sm:px-6 sm:py-10 xl:gap-8 xl:py-12 xl:text-left">
           {/* title */}
           <motion.h1
             variants={fadeIn("down", 0.2)}
@@ -60,7 +60,7 @@ const Home = () => {
               smoother development processes, and reliable delivery for growing
               products.
             </p>
-            <p>
+            <p className="hidden md:block">
               Clean code and modern tooling matter to me; I keep exploring tech
               that helps ship faster and better
               {"."}
