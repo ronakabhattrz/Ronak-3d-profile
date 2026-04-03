@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Script from "next/script";
 import { useRouter } from "next/router";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Layout from "../components/Layout";
 /** Vercel Web Analytics — Pages Router: see README “Vercel Web Analytics — Get Started”. */
@@ -47,6 +48,7 @@ function MyApp({ Component, pageProps }) {
         </AnimatePresence>
       </Layout>
       <VercelAnalytics />
+      <SpeedInsights />
     </>
   );
 }
