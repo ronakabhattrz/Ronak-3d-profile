@@ -24,6 +24,13 @@
     "particle-effect"
   ],
   "license": "MIT",
+  "browserslist": [
+    "chrome >= 92",
+    "edge >= 92",
+    "firefox >= 90",
+    "safari >= 15.4",
+    "ios >= 15.4"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sanidhyy/modern-portfolio.git"

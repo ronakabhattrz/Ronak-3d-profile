@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 // icons
 import {
@@ -31,7 +31,8 @@ export const navData = [
 ];
 
 const Nav = () => {
-  const pathname = usePathname();
+  const router = useRouter();
+  const pathname = router.pathname || "/";
 
   return (
     <nav
@@ -39,35 +40,41 @@ const Nav = () => {
       aria-label="Primary"
     >
       <div className="pointer-events-auto flex w-full xl:flex-col items-center justify-between xl:justify-center gap-y-10 px-4 md:px-40 xl:px-0 min-h-[72px] sm:min-h-[80px] xl:h-max py-3 sm:py-4 xl:py-8 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] xl:pb-8 bg-white/10 backdrop-blur-md border-t border-white/[0.08] xl:border-t-0 text-3xl xl:text-xl xl:rounded-full">
-        {navData.map((link, i) => (
-          <Link
-            className={`${
-              link.path === pathname && "text-accent"
-            } relative flex items-center group hover:text-accent transition-all duration-300`}
-            href={link.path}
-            key={i}
-          >
-            <div
-              role="tooltip"
-              className="absolute pr-14 right-0 hidden xl:group-hover:flex"
+        {navData.map((item, i) => {
+          const active = item.path === pathname;
+          const Icon = item.Icon;
+          return (
+            <Link
+              className={`relative flex items-center transition-all duration-300 hover:text-accent ${
+                active ? "text-accent" : "text-white/90"
+              } group`}
+              href={item.path}
+              key={i}
+              aria-current={active ? "page" : undefined}
             >
-              <div className="bg-white relative flex text-primary items-center p-[6px] rounded-[3px]">
-                <div className="text-[12px] leading-none font-semibold capitalize">
-                  {link.name}
+              <span className="sr-only">{item.name}</span>
+              <div
+                role="tooltip"
+                className="absolute right-0 hidden pr-14 xl:group-hover:flex"
+              >
+                <div className="relative flex items-center rounded-[3px] bg-white p-[6px] text-primary">
+                  <div className="text-[12px] font-semibold capitalize leading-none">
+                    {item.name}
+                  </div>
+
+                  <div
+                    className="absolute -right-2 border-y-[6px] border-l-8 border-r-0 border-solid border-y-transparent border-l-white"
+                    aria-hidden
+                  />
                 </div>
-
-                <div
-                  className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2"
-                  aria-hidden
-                />
               </div>
-            </div>
 
-            <div>
-              <link.Icon aria-hidden />
-            </div>
-          </Link>
-        ))}
+              <span aria-hidden className="flex">
+                <Icon />
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );

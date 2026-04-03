@@ -8,13 +8,15 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-y-3 sm:gap-y-0 py-4 sm:py-5">
           {/* logo */}
-          <Link href="/">
+          <Link href="/" className="inline-block shrink-0">
             <Image
               src="/logo.png"
-              alt="logo"
+              alt="Ronak Bhatt — home"
               width={220}
               height={48}
               priority
+              quality={86}
+              sizes="(max-width: 640px) 160px, 220px"
             />
           </Link>
 

@@ -1,10 +1,16 @@
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
-import ParticlesContainer from "../components/ParticlesContainer";
 import ProjectsBtn from "../components/ProjectsBtn";
 import Avatar from "../components/Avatar";
 
 import { fadeIn } from "../variants";
+
+const ParticlesContainer = dynamic(
+  () => import("../components/ParticlesContainer"),
+  { ssr: false }
+);
 
 const Home = () => {
   return (
@@ -93,28 +99,34 @@ const Home = () => {
           </motion.div>
         </div>
       </div>
-      {/* Desktop-only hero art + particles (off on small screens — avoids canvas blocking taps) */}
+      {/* Desktop-only: optimized LCP image + particles (canvas client-only) */}
       <div className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-[1280px] xl:block">
-        {/* bg img */}
-        <div
-          role="img"
-          className="bg-none xl:bg-explosion xl:bg-cover xl:bg-right xl:bg-no-repeat w-full h-full absolute mix-blend-color-dodge translate-z-0"
+        <Image
+          src="/bg-explosion.png"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          quality={68}
+          sizes="1280px"
+          className="object-cover object-right mix-blend-color-dodge"
           aria-hidden
         />
 
-        {/* particles */}
         <ParticlesContainer />
 
-        {/* avatar — desktop hero only */}
         <motion.div
           variants={fadeIn("up", 0.5)}
           initial="hidden"
           animate="show"
           exit="hidden"
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="hidden xl:flex w-full h-full max-w-[737px] max-h-[678px] absolute bottom-0 right-[8%] items-end"
+          className="absolute bottom-0 right-[8%] z-[1] hidden max-h-[678px] w-full max-w-[737px] items-end xl:flex"
         >
-          <Avatar />
+          <Avatar
+            priority
+            sizes="min(737px, 42vw)"
+          />
         </motion.div>
       </div>
     </div>

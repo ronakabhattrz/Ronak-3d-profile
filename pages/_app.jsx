@@ -3,7 +3,6 @@ import Script from "next/script";
 import { useRouter } from "next/router";
 
 import Layout from "../components/Layout";
-import Transition from "../components/Transition";
 import { siteMeta } from "../lib/site";
 
 import "../styles/globals.css";
@@ -15,9 +14,9 @@ function MyApp({ Component, pageProps }) {
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${siteMeta.gaId}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="ga4-init" strategy="afterInteractive">
+      <Script id="ga4-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -41,7 +40,6 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <AnimatePresence mode="wait">
           <motion.div key={router.route} className="min-h-full w-full">
-            <Transition />
             <Component {...pageProps} />
           </motion.div>
         </AnimatePresence>
