@@ -15,7 +15,7 @@ Live site: [ronakbhatt.in](https://www.ronakbhatt.in/)
 - **Blog** — Posts pulled from **Medium RSS** at build/ISR time (`lib/mediumFeed.js`), with thumbnails and excerpts; full articles open on Medium.
 - **Testimonials** — Swiper-based slider.
 - **Contact** — Form via [Formspree](https://formspree.io/) (endpoint id in `lib/site.js`).
-- **SEO & link previews** — Per-route titles, descriptions, and **canonical URLs** via **`lib/seo.js`** and **`components/Layout.jsx`** (uses `useRouter().pathname`). **Open Graph** and **Twitter/X** cards include `og:image` dimensions, alt text, `og:site_name`, `og:locale`, and `twitter:site` / `twitter:creator`. **JSON-LD** for `Person` and `WebSite` in `lib/site.js`. **`pages/_document.jsx`** sets `lang="en-CA"`, favicon, and Apple touch icon. Default share image: **`/public/og-preview.png`** (ideally 1200×630); dimensions are declared in `lib/seo.js`.
+- **SEO & link previews** — Per-route titles, descriptions, and **canonical URLs** via **`lib/seo.js`** and **`components/Layout.jsx`** (uses `useRouter().pathname`). **Open Graph** and **Twitter/X** cards include `og:image` dimensions, alt text, `og:site_name`, `og:locale`, and `twitter:site` / `twitter:creator`. **JSON-LD** for `Person` and `WebSite` in `lib/site.js`. **`pages/_document.jsx`** sets `lang="en-CA"`, favicon, and Apple touch icon. Default share image: **`/public/preview.png`** (ideally 1200×630); dimensions are declared in `lib/seo.js`.
 - **Analytics** — [Vercel Web Analytics](https://vercel.com/docs/analytics) is wired per **[Vercel Web Analytics — Get Started](#vercel-web-analytics--get-started)** below. Google Analytics 4 and Hotjar are still in `lib/site.js` / `_app.jsx`.
 
 ---
@@ -76,7 +76,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 - **`pageSeo`** — per-pathname entries (`/`, `/about`, `/work`, `/blog`, etc.) for **title**, **description**, **keywords**, and **OG image alt** text.  
 - **`getSeoForPath(pathname)`** — used by `Layout` so each route gets the correct **`<title>`**, **canonical**, and social tags.  
-- Adjust **`OG_IMAGE_WIDTH`** / **`OG_IMAGE_HEIGHT`** if you replace **`og-preview.png`** with another size.  
+- Adjust **`OG_IMAGE_WIDTH`** / **`OG_IMAGE_HEIGHT`** if you replace **`preview.png`** with another size.  
 - **`ogSocial`** — `siteName`, `locale`, Twitter `@` handles for cards.
 
 ### Other
@@ -134,7 +134,7 @@ To start counting visitors and page views ([full docs](https://vercel.com/docs/a
 │   ├── services/
 │   ├── testimonials/
 │   └── work/
-├── public/              # Static assets (og-preview.png, favicon, resume, images)
+├── public/              # Static assets (preview.png, favicon, resume, images)
 ├── styles/
 │   └── globals.css      # Tailwind layers + global utilities
 ├── variants.js          # Framer Motion variant helpers
