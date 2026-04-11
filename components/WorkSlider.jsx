@@ -59,7 +59,7 @@ const WorkSlider = () => {
           >
             <Image
               src={image.path}
-              alt=""
+              alt={image.title}
               fill
               quality={78}
               className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"

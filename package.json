@@ -59,7 +59,6 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@next/font": "^13.4.4",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^10.12.16",

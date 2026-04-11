@@ -181,7 +181,7 @@ const About = () => {
               >
                 Hello! I am a highly experienced Ruby on Rails / JS full-stack
                 developer with a strong focus on writing clean and efficient
-                code. With over 10 years of experience, I bring a wealth of
+                code. With 8+ years of experience, I bring a wealth of
                 expertise to the table. If you are searching for an expert who
                 perfectly matches my skill set, look no further. I am here to
                 provide comprehensive solutions tailored to your specific
@@ -197,7 +197,7 @@ const About = () => {
               >
                 I am a full stack developer with skills in Ruby, Ruby on Rails,
                 JavaScript, ReactJS, VueJS, and NodeJS; I build web features and
-                relevant products for businesses. In the past 15 years, I have
+                relevant products for businesses. Over 8+ years of full-stack work, I have
                 acquired teamwork, problem-solving, and exceptional communication
                 skills from coding with full-stack development colleagues around
                 the world.
@@ -245,7 +245,7 @@ const About = () => {
                     className="text-center xl:text-left"
                   >
                     <div className="text-3xl sm:text-4xl xl:text-[2.5rem] font-extrabold text-accent tabular-nums leading-none mb-2">
-                      <CountUp start={0} end={s.end} duration={4} />
+                      <CountUp start={0} end={s.end} duration={2.5} enableScrollSpy scrollSpyOnce />
                     </div>
                     <div className="text-[10px] sm:text-xs uppercase tracking-wider text-white/45 leading-snug max-w-[9rem] mx-auto xl:mx-0">
                       {s.label}

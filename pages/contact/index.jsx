@@ -8,10 +8,12 @@ import { siteMeta } from "../../lib/site";
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
+    setError("");
 
     const form = event.target;
     const fullname = form.fullname.value.trim();
@@ -39,11 +41,11 @@ const Contact = () => {
       } else {
         const data = await res.json().catch(() => ({}));
         console.error("Formspree error", data);
-        alert("Something went wrong. Please email ronakabhattrz@gmail.com directly.");
+        setError("Something went wrong. Please email ronakabhattrz@gmail.com directly.");
       }
     } catch (e) {
       console.error(e);
-      alert("Something went wrong. Please email ronakabhattrz@gmail.com directly.");
+      setError("Something went wrong. Please email ronakabhattrz@gmail.com directly.");
     } finally {
       setIsLoading(false);
     }
@@ -192,6 +194,11 @@ const Contact = () => {
                   required
                   aria-required
                 />
+                {error && (
+                  <p role="alert" className="text-sm text-red-400 -mt-2">
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
                   className="btn rounded-full border border-white/50 max-w-[200px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"

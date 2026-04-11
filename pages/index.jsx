@@ -49,7 +49,7 @@ const Home = () => {
           >
             <p>
               I&apos;m Ronak Bhatt — a Ruby on Rails and JavaScript full-stack
-              developer with <strong className="font-medium text-white/80">9+ years</strong>{" "}
+              developer with <strong className="font-medium text-white/80">8+ years</strong>{" "}
               in the stack. I focus on clean, efficient code and ship features with
               Ruby, Rails, React, Vue, and Node, and I help teams adopt modern
               workflows.
