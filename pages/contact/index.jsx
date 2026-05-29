@@ -56,7 +56,7 @@ const Contact = () => {
       <div className="container mx-auto py-24 xl:py-32 text-center xl:text-left">
         <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 max-w-6xl mx-auto items-start justify-center">
           <div className="flex-1 w-full max-w-[700px] mx-auto xl:mx-0">
-            <motion.h2
+            <motion.h1
               variants={fadeIn("up", 0.2)}
               initial="hidden"
               animate="show"
@@ -64,7 +64,7 @@ const Contact = () => {
               className="h2 text-center xl:text-left mb-8"
             >
               Let&apos;s <span className="text-accent">connect.</span>
-            </motion.h2>
+            </motion.h1>
 
             <motion.div
               variants={fadeIn("up", 0.25)}
@@ -122,7 +122,7 @@ const Contact = () => {
           </div>
 
           <div className="flex-1 w-full max-w-[700px] mx-auto xl:mx-0">
-            <motion.h3
+            <motion.h2
               variants={fadeIn("up", 0.35)}
               initial="hidden"
               animate="show"
@@ -130,7 +130,7 @@ const Contact = () => {
               className="text-lg font-semibold mb-6 text-center xl:text-left"
             >
               Contact form
-            </motion.h3>
+            </motion.h2>
 
             {sent ? (
               <motion.div

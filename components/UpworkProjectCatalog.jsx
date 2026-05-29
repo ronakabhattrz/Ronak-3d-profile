@@ -23,12 +23,12 @@ const UpworkProjectCatalog = ({ isFirst = false }) => {
       }
       aria-labelledby="upwork-catalog-heading"
     >
-      <h3
+      <h2
         id="upwork-catalog-heading"
         className="text-xl sm:text-2xl font-semibold text-center xl:text-left mb-3"
       >
         Project <span className="text-accent">catalog</span>
-      </h3>
+      </h2>
       <p className="text-sm sm:text-base text-white/65 text-center xl:text-left max-w-2xl mb-8 sm:mb-10">
         {upworkCatalogIntro}
       </p>

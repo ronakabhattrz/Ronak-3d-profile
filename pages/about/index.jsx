@@ -26,25 +26,25 @@ export const aboutData = [
       {
         title: "Rails, JS & frontend",
         icons: [
-          SiRubyonrails,
-          FaJs,
-          FaReact,
-          SiVuedotjs,
-          SiNodedotjs,
-          SiTypescript,
-          FaHtml5,
-          FaCss3,
-          SiPython,
+          { Icon: SiRubyonrails, name: "Ruby on Rails" },
+          { Icon: FaJs, name: "JavaScript" },
+          { Icon: FaReact, name: "React" },
+          { Icon: SiVuedotjs, name: "Vue.js" },
+          { Icon: SiNodedotjs, name: "Node.js" },
+          { Icon: SiTypescript, name: "TypeScript" },
+          { Icon: FaHtml5, name: "HTML5" },
+          { Icon: FaCss3, name: "CSS3" },
+          { Icon: SiPython, name: "Python" },
         ],
       },
       {
         title: "Data, APIs & DevOps",
         icons: [
-          SiPostgresql,
-          SiRedis,
-          SiGraphql,
-          SiDocker,
-          SiAmazonaws,
+          { Icon: SiPostgresql, name: "PostgreSQL" },
+          { Icon: SiRedis, name: "Redis" },
+          { Icon: SiGraphql, name: "GraphQL" },
+          { Icon: SiDocker, name: "Docker" },
+          { Icon: SiAmazonaws, name: "Amazon AWS" },
         ],
       },
     ],
@@ -161,7 +161,7 @@ const About = () => {
               Web Development Expert 🚀
             </motion.div>
 
-            <motion.h2
+            <motion.h1
               variants={fadeIn("right", 0.2)}
               initial="hidden"
               animate="show"
@@ -169,7 +169,7 @@ const About = () => {
               className="h2 mb-6 xl:mb-8"
             >
               About <span className="text-accent">me</span>
-            </motion.h2>
+            </motion.h1>
 
             <div className="mx-auto xl:mx-0 max-w-xl xl:max-w-none space-y-5 text-[15px] sm:text-base leading-relaxed">
               <motion.p
@@ -306,11 +306,12 @@ const About = () => {
                             {item.title}
                           </p>
                           <div className="flex flex-wrap justify-center xl:justify-start gap-3">
-                            {item.icons.map((Icon, iconI) => (
+                            {item.icons.map(({ Icon, name }, iconI) => (
                               <span
                                 key={iconI}
                                 className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-xl text-white hover:border-accent/40 hover:text-accent transition-colors"
-                                title=""
+                                title={name}
+                                aria-label={name}
                               >
                                 <Icon aria-hidden />
                               </span>

@@ -8,7 +8,7 @@ const Testimonials = () => {
   return (
     <div className="min-h-full bg-primary/30 py-32 text-center">
       <div className="container mx-auto flex min-h-full flex-col justify-center">
-        <motion.h2
+        <motion.h1
           variants={fadeIn("up", 0.2)}
           initial="hidden"
           animate="show"
@@ -17,7 +17,7 @@ const Testimonials = () => {
         >
           Client{" "}
           <span className="text-accent">testimonials.</span>
-        </motion.h2>
+        </motion.h1>
 
         <motion.p
           variants={fadeIn("up", 0.25)}

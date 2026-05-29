@@ -3,14 +3,15 @@ import Image from "next/image";
 
 import { fadeIn } from "../variants";
 
-/** Logos in /public — same set as ronakbhatt.in “Major clients” */
+/** Logos in /public — same set as ronakbhatt.in “Major clients”
+ *  Update `name` with the real company name for each logo file. */
 const clients = [
-  { src: "/logo-1-color.png", alt: "Client logo" },
-  { src: "/logo-2-color.svg", alt: "Client logo" },
-  { src: "/logo-3-color.png", alt: "Client logo" },
-  { src: "/logo-4-color.png", alt: "Client logo" },
-  { src: "/logo-5-color.png", alt: "Client logo" },
-  { src: "/logo-6-color.png", alt: "Client logo" },
+  { src: “/logo-1-color.png”, name: “Major client” },
+  { src: “/logo-2-color.svg”, name: “Major client” },
+  { src: “/logo-3-color.png”, name: “Major client” },
+  { src: “/logo-4-color.png”, name: “Major client” },
+  { src: “/logo-5-color.png”, name: “Major client” },
+  { src: “/logo-6-color.png”, name: “Major client” },
 ];
 
 const MajorClients = () => {
@@ -37,7 +38,7 @@ const MajorClients = () => {
               <div className="relative h-[69.12px] w-full max-w-[172.8px] opacity-70 transition-opacity duration-300 group-hover:opacity-100">
                 <Image
                   src={client.src}
-                  alt={client.alt}
+                  alt={`${client.name} logo`}
                   fill
                   className="object-contain object-center"
                   sizes="(max-width: 640px) 30vw, 200px"
