@@ -1,11 +1,11 @@
 # Ronak Bhatt — Ruby on Rails & React Full-Stack Developer
 
-> Ronak Bhatt is a full-stack developer based in London, Ontario, Canada with 8+ years of experience in Ruby on Rails, React, TypeScript, Next.js, Vue, Node.js and AWS. He builds scalable web applications, upgrades legacy Rails apps, designs APIs, tunes performance, and works remotely with teams in Canada, the US, the UK and Europe. Upwork Top Rated Plus. Open to freelance projects and full-time roles.
+> Ronak Bhatt is a full-stack developer based in London, Ontario, Canada with 8+ years of experience in Ruby on Rails, React, TypeScript, Next.js, Vue, Node.js and AWS. He builds scalable web applications, upgrades legacy Rails apps, designs APIs, tunes performance, and works remotely with teams in Canada, the US, the UK and Europe. Upwork Top Rated Plus. Taking on freelance and contract projects; also open to the right full-time role.
 
 ## Services
 
 - [Web development](https://www.ronakbhatt.in/services): Rails monoliths, React and Next.js front-ends
-- [Rails upgrades & maintenance](https://www.ronakbhatt.in/services): framework upgrades on existing apps, tested so existing features keep working
+- [Rails upgrades & maintenance](https://www.ronakbhatt.in/services/rails-upgrade): framework upgrades on existing apps, tested so existing features keep working
 - [Backend & API architecture](https://www.ronakbhatt.in/services): data models, REST and GraphQL APIs, background jobs, integrations
 - [Performance tuning](https://www.ronakbhatt.in/services): slow pages and queries, caching, N+1 fixes
 - [Code review & CI/CD](https://www.ronakbhatt.in/services): refactoring proposals and delivery workflows

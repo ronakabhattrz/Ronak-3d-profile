@@ -13,14 +13,14 @@ const clients = [
   { src: "/logo-6-color.png", name: "HPPC" },
 ];
 
-const MajorClients = () => {
+const MajorClients = ({ className = "my-24" }) => {
   return (
     <motion.section
       variants={fadeIn("up", 0.1)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-60px" }}
-      className="my-24"
+      className={className}
       aria-labelledby="major-clients-heading"
     >
       <div className="mb-8 flex flex-col items-center gap-3 text-center">

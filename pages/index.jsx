@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { HiArrowDownTray, HiArrowRight } from "react-icons/hi2";
 
 import Avatar from "../components/Avatar";
+import BookCallButton from "../components/BookCallButton";
+import HomeProof from "../components/HomeProof";
+import MajorClients from "../components/MajorClients";
 import Socials from "../components/Socials";
 import Stats from "../components/Stats";
 import { stackTicker } from "../data/profile";
@@ -27,6 +30,7 @@ const highlights = [
   {
     title: "Upgrades without drama",
     text: "Rails version upgrades, refactors and CI/CD, with every existing feature still working afterwards.",
+    href: "/services/rails-upgrade",
   },
 ];
 
@@ -51,7 +55,7 @@ const Home = () => {
               className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2.5 pr-4 text-xs font-medium text-zinc-300 backdrop-blur"
             >
               <span className="h-2 w-2 animate-pulse-dot rounded-full bg-emerald-400" />
-              Open to new opportunities
+              Taking on new projects
             </motion.div>
 
             <motion.h1
@@ -89,18 +93,22 @@ const Home = () => {
               animate="show"
               className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
             >
-              <Link href="/work" className="btn-primary group">
-                View my work
+              <Link href="/contact" className="btn-primary group">
+                Start a project
                 <HiArrowRight
                   aria-hidden
                   className="transition-transform group-hover:translate-x-0.5"
                 />
               </Link>
+              <BookCallButton />
+              <Link href="/work" className="btn-ghost">
+                View my work
+              </Link>
               <a
                 href={siteMeta.resumeUrl}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="btn-ghost"
+                className="inline-flex h-12 items-center gap-2 px-3 text-sm font-medium text-zinc-400 transition-colors hover:text-white"
               >
                 <HiArrowDownTray aria-hidden />
                 Resume
@@ -146,6 +154,10 @@ const Home = () => {
         </div>
       </section>
 
+      <div className="container max-w-content">
+        <MajorClients className="pt-20 sm:pt-24" />
+      </div>
+
       <section className="container max-w-content py-20 sm:py-28">
         <div className="mb-10 flex flex-col gap-4 sm:mb-14 md:flex-row md:items-end md:justify-between">
           <div>
@@ -175,11 +187,21 @@ const Home = () => {
               <span className="font-mono text-xs text-accent">0{i + 1}</span>
               <h3 className="mt-6 text-lg font-semibold text-white">{h.title}</h3>
               <p className="mt-2 text-[15px]">{h.text}</p>
+              {h.href ? (
+                <Link
+                  href={h.href}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white transition-colors hover:text-accent"
+                >
+                  How upgrades work <HiArrowRight aria-hidden />
+                </Link>
+              ) : null}
             </motion.article>
           ))}
         </div>
 
         <Stats className="mt-4" />
+
+        <HomeProof />
       </section>
     </>
   );

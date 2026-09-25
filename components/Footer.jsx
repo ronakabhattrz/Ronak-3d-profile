@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { HiArrowUpRight } from "react-icons/hi2";
 
+import BookCallButton from "./BookCallButton";
 import Socials from "./Socials";
 import { navData } from "./Nav";
 
@@ -31,6 +32,7 @@ const Footer = () => {
                 Start a conversation
                 <HiArrowUpRight aria-hidden />
               </Link>
+              <BookCallButton />
               <a href="mailto:ronakabhattrz@gmail.com" className="btn-ghost">
                 ronakabhattrz@gmail.com
               </a>
