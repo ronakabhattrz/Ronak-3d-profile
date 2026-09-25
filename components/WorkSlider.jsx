@@ -95,6 +95,7 @@ const WorkSlider = () => {
                 alt={`${item.title} website`}
                 fill
                 quality={78}
+                priority={i < 2}
                 className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                 sizes={
                   isWide(i, portfolioItems.length)

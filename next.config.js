@@ -14,6 +14,9 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/upwork-cloud/**",
       },
+      // Medium article images (blog list + /blog/[slug])
+      { protocol: "https", hostname: "cdn-images-1.medium.com" },
+      { protocol: "https", hostname: "miro.medium.com" },
     ],
   },
   experimental: {

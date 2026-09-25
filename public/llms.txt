@@ -7,6 +7,9 @@
 - [Web development](https://www.ronakbhatt.in/services): Rails monoliths, React and Next.js front-ends
 - [Rails upgrades & maintenance](https://www.ronakbhatt.in/services/rails-upgrade): framework upgrades on existing apps, tested so existing features keep working
 - [Backend & API architecture](https://www.ronakbhatt.in/services): data models, REST and GraphQL APIs, background jobs, integrations
+- [Rails maintenance & support](https://www.ronakbhatt.in/services/rails-maintenance): ongoing upkeep, updates, fixes and deploys
+- [Hire a Rails developer](https://www.ronakbhatt.in/services/hire-rails-developer): freelance, contract or long-term engagements
+- [React & Next.js development](https://www.ronakbhatt.in/services/react-nextjs): front-ends, landing pages and dashboards
 - [Performance tuning](https://www.ronakbhatt.in/services): slow pages and queries, caching, N+1 fixes
 - [Code review & CI/CD](https://www.ronakbhatt.in/services): refactoring proposals and delivery workflows
 - [Web design](https://www.ronakbhatt.in/services): landing pages and responsive UI
@@ -18,6 +21,8 @@
 - Monthly WordPress management & support: from $499, 30 days delivery
 
 ## Pages
+
+- [Rails upgrade readiness checklist](https://www.ronakbhatt.in/resources/rails-upgrade-checklist): free step-by-step checklist before upgrading Rails
 
 - [About](https://www.ronakbhatt.in/about): experience timeline, skills, certifications, education
 - [Work](https://www.ronakbhatt.in/work): selected shipped projects and the Upwork project catalog

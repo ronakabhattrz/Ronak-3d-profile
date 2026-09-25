@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { HiArrowUpRight } from "react-icons/hi2";
+import { HiArrowRight, HiArrowUpRight } from "react-icons/hi2";
 
 import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
@@ -10,7 +11,7 @@ import { siteMeta } from "../../lib/site";
 import { fadeIn } from "../../variants";
 
 export async function getStaticProps() {
-  const posts = await getMediumPosts();
+  const posts = await getMediumPosts({ throwOnError: true });
   return {
     props: { posts },
     revalidate: 3600,
@@ -55,8 +56,8 @@ const Blog = ({ posts }) => {
         }
       >
         <p>
-          The latest articles from my Medium. Open any card to read the full
-          post (comments and claps stay on Medium).
+          Articles on Ruby on Rails, JavaScript and shipping software. Comments
+          and claps live on Medium.
         </p>
       </PageHeader>
 
@@ -103,7 +104,7 @@ const Blog = ({ posts }) => {
                         src={post.image}
                         alt=""
                         fill
-                        unoptimized
+                        priority={featured}
                         sizes={featured ? "(max-width: 960px) 100vw, 640px" : "(max-width: 768px) 100vw, 400px"}
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       />
@@ -138,14 +139,12 @@ const Blog = ({ posts }) => {
                         featured ? "text-2xl sm:text-3xl" : "text-lg"
                       }`}
                     >
-                      <a
-                        href={post.link}
-                        target="_blank"
-                        rel="noreferrer noopener"
+                      <Link
+                        href={`/blog/${post.slug}`}
                         className="after:absolute after:inset-0 after:rounded-3xl"
                       >
                         {post.title}
-                      </a>
+                      </Link>
                     </h3>
                     {post.snippet ? (
                       <p
@@ -157,8 +156,8 @@ const Blog = ({ posts }) => {
                       </p>
                     ) : null}
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-medium text-zinc-300 transition-colors group-hover:text-accent">
-                      Read on Medium
-                      <HiArrowUpRight aria-hidden />
+                      Read article · {post.minutes} min
+                      <HiArrowRight aria-hidden />
                     </span>
                   </div>
                 </article>

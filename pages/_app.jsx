@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }) {
       </Script>
 
       <MotionConfig reducedMotion="user">
-        <Layout>
+        <Layout seo={pageProps.seo}>
           <AnimatePresence
             mode="wait"
             initial={false}

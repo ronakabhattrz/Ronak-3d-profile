@@ -41,6 +41,8 @@ module.exports = {
         secondary: "#15151b",
         /** Matches the dot in the logo */
         accent: "#F13024",
+        /** Button fill: white text on this passes WCAG AA (4.9:1); #F13024 is 4.2:1 */
+        "accent-strong": "#D92A1E",
       },
       maxWidth: {
         content: "1200px",
@@ -50,6 +52,7 @@ module.exports = {
         marquee: "marquee 40s linear infinite",
         "pulse-dot": "pulse-dot 2s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
+        "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
       keyframes: {
         marquee: {
@@ -63,6 +66,10 @@ module.exports = {
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
+        },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "none" },
         },
       },
       fontFamily: {

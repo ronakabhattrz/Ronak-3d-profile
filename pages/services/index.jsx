@@ -15,6 +15,7 @@ import JsonLd from "../../components/JsonLd";
 import MajorClients from "../../components/MajorClients";
 import PageHeader from "../../components/PageHeader";
 import { faq } from "../../data/faq";
+import { servicePageList } from "../../data/servicePages";
 import { services } from "../../data/services";
 import { breadcrumbJsonLd, faqJsonLd, servicesJsonLd } from "../../lib/schema";
 import { fadeIn } from "../../variants";
@@ -88,7 +89,8 @@ const Services = () => {
                 href={item.href}
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white transition-colors hover:text-accent"
               >
-                Learn more <HiArrowRight aria-hidden />
+                Learn more<span className="sr-only"> about {item.title}</span>{" "}
+                <HiArrowRight aria-hidden />
               </Link>
             ) : null}
             <ul className="mt-6 flex flex-wrap gap-1.5">
@@ -101,6 +103,34 @@ const Services = () => {
           </motion.li>
         ))}
       </ul>
+
+      <section aria-labelledby="specialist-heading" className="mt-24">
+        <p className="eyebrow">Go deeper</p>
+        <h2 id="specialist-heading" className="h3 mt-4">
+          Specialist <span className="em">services</span>
+        </h2>
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {servicePageList.map((p) => (
+            <li key={p.slug}>
+              <Link
+                href={`/services/${p.slug}`}
+                className="card card-hover group flex h-full flex-col p-6"
+              >
+                <span className="text-base font-semibold text-white">
+                  {p.navLabel}
+                </span>
+                <span className="mt-2 flex-1 text-sm text-zinc-400">
+                  {p.seo.description.split(". ")[0]}.
+                </span>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white group-hover:text-accent">
+                  Learn more<span className="sr-only"> about {p.navLabel}</span>{" "}
+                  <HiArrowRight aria-hidden />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <MajorClients />
 

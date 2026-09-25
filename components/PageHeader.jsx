@@ -1,10 +1,7 @@
-import { motion } from "framer-motion";
-
-import { fadeIn } from "../variants";
-
 /**
  * Consistent top-of-page intro: eyebrow label, the page's single H1, and a lead.
  * `title` may contain JSX (e.g. <span className="em">…</span>).
+ * Uses CSS entrance animations so the H1 paints without waiting for JS (LCP).
  */
 const PageHeader = ({ eyebrow, title, children, align = "left", aside }) => {
   const centered = align === "center";
@@ -16,44 +13,36 @@ const PageHeader = ({ eyebrow, title, children, align = "left", aside }) => {
       }`}
     >
       <div className={centered ? "mx-auto max-w-3xl" : "max-w-3xl"}>
-        <motion.p
-          variants={fadeIn("up", 0.05)}
-          initial="hidden"
-          animate="show"
-          className="eyebrow"
+        <p
+          className="animate-fade-up eyebrow"
+          style={{ animationDelay: "0.05s" }}
         >
           {eyebrow}
-        </motion.p>
-        <motion.h1
-          variants={fadeIn("up", 0.12)}
-          initial="hidden"
-          animate="show"
-          className="h2 mt-5"
+        </p>
+        <h1
+          className="animate-fade-up h2 mt-5"
+          style={{ animationDelay: "0.12s" }}
         >
           {title}
-        </motion.h1>
+        </h1>
         {children ? (
-          <motion.div
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            animate="show"
-            className={`mt-6 max-w-2xl text-base sm:text-lg [&_p]:text-inherit text-zinc-400 ${
+          <div
+            style={{ animationDelay: "0.2s" }}
+            className={`animate-fade-up mt-6 max-w-2xl text-base sm:text-lg [&_p]:text-inherit text-zinc-400 ${
               centered ? "mx-auto" : ""
             }`}
           >
             {children}
-          </motion.div>
+          </div>
         ) : null}
       </div>
       {aside ? (
-        <motion.div
-          variants={fadeIn("up", 0.25)}
-          initial="hidden"
-          animate="show"
-          className="shrink-0"
+        <div
+          className="animate-fade-up shrink-0"
+          style={{ animationDelay: "0.25s" }}
         >
           {aside}
-        </motion.div>
+        </div>
       ) : null}
     </header>
   );

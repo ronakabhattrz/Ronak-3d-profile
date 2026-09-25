@@ -72,7 +72,7 @@
     @apply inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60;
   }
   .btn-primary {
-    @apply btn bg-accent text-white shadow-[0_10px_40px_-10px_rgba(241,48,36,0.7)] hover:bg-[#ff4336] hover:shadow-[0_14px_50px_-10px_rgba(241,48,36,0.9)];
+    @apply btn bg-accent-strong text-white shadow-[0_10px_40px_-10px_rgba(241,48,36,0.7)] hover:bg-[#C4241A] hover:shadow-[0_14px_50px_-10px_rgba(241,48,36,0.9)];
   }
   .btn-ghost {
     @apply btn border border-white/15 bg-white/[0.03] text-white hover:border-white/30 hover:bg-white/[0.07];
@@ -151,5 +151,94 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Long-form article body (/blog/[slug]) — sanitized Medium HTML */
+.article {
+  @apply text-[17px] leading-[1.8] text-zinc-300;
+}
+.article > * + * {
+  @apply mt-6;
+}
+.article p {
+  @apply text-[17px] leading-[1.8] text-zinc-300;
+}
+.article h2,
+.article h3,
+.article h4 {
+  @apply mt-12 font-semibold tracking-[-0.02em] text-white;
+}
+.article h2 {
+  @apply text-2xl sm:text-3xl;
+}
+.article h3 {
+  @apply text-xl sm:text-2xl;
+}
+.article a {
+  @apply text-white underline decoration-accent/60 underline-offset-4 hover:decoration-accent;
+}
+.article strong,
+.article b {
+  @apply font-semibold text-white;
+}
+.article ul,
+.article ol {
+  @apply space-y-2 pl-6;
+}
+.article ul {
+  @apply list-disc marker:text-accent;
+}
+.article ol {
+  @apply list-decimal marker:text-zinc-500;
+}
+.article blockquote {
+  @apply border-l-2 border-accent pl-5 font-serif text-xl italic text-zinc-200;
+}
+.article pre {
+  @apply overflow-x-auto rounded-2xl border border-white/10 bg-ink-900 p-5 font-mono text-sm leading-relaxed text-zinc-200;
+}
+.article code {
+  @apply font-mono text-[0.9em] text-zinc-100;
+}
+.article figure img,
+.article img {
+  @apply h-auto w-full rounded-2xl border border-white/[0.07];
+}
+.article figcaption {
+  @apply mt-3 text-center text-sm text-zinc-500;
+}
+.article hr {
+  @apply my-12 border-white/10;
+}
+
+/* Print (checklist "Save as PDF"): plain black-on-white, no site chrome */
+@media print {
+  header.fixed,
+  nav,
+  footer,
+  .site-backdrop {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .card {
+    border-color: #ddd !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .h2,
+  h1,
+  h2,
+  p,
+  span,
+  label {
+    color: #000 !important;
+  }
+  .em {
+    color: #d92a1e !important;
   }
 }

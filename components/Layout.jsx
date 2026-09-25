@@ -31,9 +31,13 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
-const Layout = ({ children }) => {
+/**
+ * `seo` (optional, from a page's getStaticProps) overrides the route defaults —
+ * used by dynamic pages such as /blog/[slug].
+ */
+const Layout = ({ children, seo: seoOverride }) => {
   const router = useRouter();
-  const seo = getSeoForPath(router.pathname);
+  const seo = { ...getSeoForPath(router.pathname), ...(seoOverride || {}) };
   const isNotFound = router.pathname === "/404";
   const robotsContent = isNotFound
     ? "noindex, follow"
@@ -52,7 +56,7 @@ const Layout = ({ children }) => {
         <meta name="theme-color" content={siteMeta.themeColor} />
         <link rel="canonical" href={seo.canonical} />
 
-        <meta property="og:type" content={ogSocial.type} />
+        <meta property="og:type" content={seo.type || ogSocial.type} />
         <meta property="og:site_name" content={ogSocial.siteName} />
         <meta property="og:locale" content={ogSocial.locale} />
         <meta property="og:url" content={seo.canonical} />
