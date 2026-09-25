@@ -12,6 +12,10 @@ import {
   HiNewspaper,
 } from "react-icons/hi2";
 
+/** Active for the exact path, and for sub-pages (e.g. /services/rails-upgrade). */
+const isActive = (itemPath, pathname) =>
+  itemPath === "/" ? pathname === "/" : pathname === itemPath || pathname.startsWith(`${itemPath}/`);
+
 export const navData = [
   { name: "home", path: "/", Icon: HiHome },
   { name: "about", path: "/about", Icon: HiUser },
@@ -38,7 +42,7 @@ export const DesktopNav = () => {
     <nav aria-label="Primary" className="hidden xl:block">
       <ul className="flex items-center gap-1">
         {navData.map((item) => {
-          const active = item.path === pathname;
+          const active = isActive(item.path, pathname);
           return (
             <li key={item.path}>
               <Link
@@ -71,7 +75,7 @@ const Nav = () => {
     >
       <ul className="mx-auto flex max-w-lg items-center justify-between rounded-2xl border border-white/10 bg-ink-900/85 p-1.5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] backdrop-blur-xl">
         {navData.map((item) => {
-          const active = item.path === pathname;
+          const active = isActive(item.path, pathname);
           const Icon = item.Icon;
           return (
             <li key={item.path} className="flex-1">

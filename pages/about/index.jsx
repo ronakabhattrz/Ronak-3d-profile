@@ -185,9 +185,11 @@ const About = () => {
               and I thrive on contributing to strong team chemistry.
             </p>
             <p>
-              I am eager to explore full-stack opportunities in startups as well
-              as established companies. Please reach out if you are seeking a
-              passionate and capable web dev team member.
+              I take on freelance and contract projects for startups and
+              established companies: new builds, Rails upgrades, and hands-on
+              help with existing codebases. I&apos;m also open to the right
+              full-time role. If you need a capable developer who communicates
+              clearly, get in touch.
             </p>
           </div>
         </motion.div>

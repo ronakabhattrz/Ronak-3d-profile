@@ -16,6 +16,7 @@ export const services = [
   },
   {
     key: "rails-upgrades",
+    href: "/services/rails-upgrade",
     title: "Rails upgrades & maintenance",
     description:
       "Version upgrades on existing apps, tested so every existing feature keeps working afterwards.",

@@ -26,8 +26,8 @@ export const faq = [
     a: "Yes. Ronak is based in London, Ontario, Canada and works remotely with teams in Canada, the US, the UK and Europe.",
   },
   {
-    q: "Are you available for full-time roles as well as freelance work?",
-    a: "Ronak is open to new opportunities, including full-stack roles at startups and established companies as well as freelance and contract projects.",
+    q: "Are you available for freelance or contract work?",
+    a: "Yes. Freelance and contract projects are Ronak's main focus, from short fixed-price jobs to longer engagements with startups and established companies. He is also open to the right full-time full-stack role.",
   },
   {
     q: "How do we get started?",

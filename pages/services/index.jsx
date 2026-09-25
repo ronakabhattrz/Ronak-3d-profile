@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
+  HiArrowRight,
   HiOutlineArrowPath,
   HiOutlineBolt,
   HiOutlineCircleStack,
@@ -81,6 +83,14 @@ const Services = () => {
             </div>
             <h2 className="mt-8 text-lg font-semibold text-white">{item.title}</h2>
             <p className="mt-2 flex-1 text-[15px]">{item.description}</p>
+            {item.href ? (
+              <Link
+                href={item.href}
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-white transition-colors hover:text-accent"
+              >
+                Learn more <HiArrowRight aria-hidden />
+              </Link>
+            ) : null}
             <ul className="mt-6 flex flex-wrap gap-1.5">
               {item.tags.map((tag) => (
                 <li key={tag} className="chip text-[11px] text-zinc-400">

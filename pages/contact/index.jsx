@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   HiArrowRight,
@@ -10,6 +11,7 @@ import {
   HiOutlinePhone,
 } from "react-icons/hi2";
 
+import BookCallButton from "../../components/BookCallButton";
 import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
 import Socials from "../../components/Socials";
@@ -44,7 +46,24 @@ const channels = [
   },
 ];
 
+/** `value` doubles as the ?service= query key used by service pages. */
+const projectTypes = [
+  { value: "new-build", label: "New web app or site" },
+  { value: "rails-upgrade", label: "Rails upgrade or maintenance" },
+  { value: "existing-app", label: "Features on an existing app" },
+  { value: "performance", label: "Performance or scaling" },
+  { value: "code-review", label: "Code review / CI/CD" },
+  { value: "role", label: "Contract or full-time role" },
+  { value: "other", label: "Something else" },
+];
+const budgets = ["Under $1k", "$1k – $5k", "$5k – $15k", "$15k+", "Not sure yet"];
+const timelines = ["As soon as possible", "Within a month", "1 – 3 months", "Flexible"];
+
 const Contact = () => {
+  const { query } = useRouter();
+  const presetType = projectTypes.some((t) => t.value === query.service)
+    ? query.service
+    : "";
   const [isLoading, setIsLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -58,6 +77,10 @@ const Contact = () => {
     const fullname = form.fullname.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
+    const projectType =
+      projectTypes.find((t) => t.value === form.projectType.value)?.label || "";
+    const budget = form.budget.value;
+    const timeline = form.timeline.value;
     // Honeypot: real users never see or fill this field
     if (form._gotcha.value) {
       setIsLoading(false);
@@ -77,6 +100,10 @@ const Contact = () => {
           fullname,
           email,
           message,
+          project_type: projectType,
+          budget: budget || "Not given",
+          timeline: timeline || "Not given",
+          _subject: `New enquiry: ${projectType || "Contact form"} — ${fullname}`,
           _replyto: email,
         }),
       });
@@ -185,6 +212,8 @@ const Contact = () => {
             />
           </div>
 
+          <BookCallButton className="card card-hover flex items-center justify-center gap-2 p-4 text-sm font-medium text-white" label="Prefer to talk? Book a free call" />
+
           <Socials className="pt-2" />
         </motion.div>
 
@@ -196,7 +225,10 @@ const Contact = () => {
           className="card order-first p-6 sm:p-10 lg:order-none lg:col-span-7"
         >
           <h2 className="text-xl font-semibold text-white">Send a message</h2>
-          <p className="mt-1 text-sm">All fields are required.</p>
+          <p className="mt-1 text-sm">
+            Budget and timeline are optional, but they help me reply with
+            something useful.
+          </p>
 
           {sent ? (
             <div
@@ -265,13 +297,64 @@ const Contact = () => {
                 </div>
               </div>
               <div>
+                <label htmlFor="projectType" className="field-label">
+                  What do you need?
+                </label>
+                <select
+                  key={presetType}
+                  id="projectType"
+                  name="projectType"
+                  className="select"
+                  defaultValue={presetType}
+                  disabled={isLoading}
+                  required
+                >
+                  <option value="" disabled>
+                    Choose a project type
+                  </option>
+                  {projectTypes.map((t) => (
+                    <option key={t.value} value={t.value}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="budget" className="field-label">
+                    Budget <span className="normal-case tracking-normal text-zinc-500">(optional)</span>
+                  </label>
+                  <select id="budget" name="budget" className="select" defaultValue="" disabled={isLoading}>
+                    <option value="">Select a range</option>
+                    {budgets.map((b) => (
+                      <option key={b} value={b}>
+                        {b}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="timeline" className="field-label">
+                    Timeline <span className="normal-case tracking-normal text-zinc-500">(optional)</span>
+                  </label>
+                  <select id="timeline" name="timeline" className="select" defaultValue="" disabled={isLoading}>
+                    <option value="">Select a timeline</option>
+                    {timelines.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div>
                 <label htmlFor="message" className="field-label">
                   Message
                 </label>
                 <textarea
                   name="message"
                   id="message"
-                  placeholder="A few lines about the project, timeline and budget…"
+                  placeholder="A few lines about the project, your goals and current stack…"
                   className="textarea"
                   disabled={isLoading}
                   required
