@@ -14,8 +14,10 @@ import {
 } from "react-icons/si";
 
 import Avatar from "../../components/Avatar";
+import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
 import Stats from "../../components/Stats";
+import { breadcrumbJsonLd, profilePageJsonLd } from "../../lib/schema";
 import { fadeIn } from "../../variants";
 
 export const aboutData = [
@@ -138,6 +140,10 @@ const About = () => {
 
   return (
     <div className="container max-w-content">
+      <JsonLd
+        id="about"
+        data={[breadcrumbJsonLd("/about", "About"), profilePageJsonLd()]}
+      />
       <PageHeader
         eyebrow="About me"
         title={

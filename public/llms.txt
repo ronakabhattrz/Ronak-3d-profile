@@ -1,0 +1,43 @@
+# Ronak Bhatt — Ruby on Rails & React Full-Stack Developer
+
+> Ronak Bhatt is a full-stack developer based in London, Ontario, Canada with 8+ years of experience in Ruby on Rails, React, TypeScript, Next.js, Vue, Node.js and AWS. He builds scalable web applications, upgrades legacy Rails apps, designs APIs, tunes performance, and works remotely with teams in Canada, the US, the UK and Europe. Upwork Top Rated Plus. Open to freelance projects and full-time roles.
+
+## Services
+
+- [Web development](https://www.ronakbhatt.in/services): Rails monoliths, React and Next.js front-ends
+- [Rails upgrades & maintenance](https://www.ronakbhatt.in/services): framework upgrades on existing apps, tested so existing features keep working
+- [Backend & API architecture](https://www.ronakbhatt.in/services): data models, REST and GraphQL APIs, background jobs, integrations
+- [Performance tuning](https://www.ronakbhatt.in/services): slow pages and queries, caching, N+1 fixes
+- [Code review & CI/CD](https://www.ronakbhatt.in/services): refactoring proposals and delivery workflows
+- [Web design](https://www.ronakbhatt.in/services): landing pages and responsive UI
+
+## Fixed-price packages (Upwork)
+
+- Stunning and modern landing page: from $250, 2 days delivery
+- Ruby on Rails maintenance with Heroku: from $599, 7 days delivery
+- Monthly WordPress management & support: from $499, 30 days delivery
+
+## Pages
+
+- [About](https://www.ronakbhatt.in/about): experience timeline, skills, certifications, education
+- [Work](https://www.ronakbhatt.in/work): selected shipped projects and the Upwork project catalog
+- [Testimonials](https://www.ronakbhatt.in/testimonials): client feedback
+- [Blog](https://www.ronakbhatt.in/blog): articles on Rails and JavaScript (Medium)
+- [Contact](https://www.ronakbhatt.in/contact): project enquiries
+
+## Experience
+
+- Full-stack Developer, Crowdlinker (Toronto), Nov 2025 – present
+- Lead Software Developer, All Pro IFM (remote, USA), Nov 2022 – Oct 2025
+- Ruby Developer, Bulletproof Cyber Security (UK, remote), Jan 2022 – Nov 2022
+- Senior Engineer / Team Lead, Crest Data Systems, May 2021 – Jan 2022
+- Senior Software Engineer, MainStreet (Hoist), Aug 2020 – Apr 2021
+- Software Engineer, Upwork freelance, Sep 2017 – Jul 2020
+
+## Contact
+
+- Email: ronakabhattrz@gmail.com
+- Phone: +1 (817) 947-5211
+- LinkedIn: https://www.linkedin.com/in/ronakabhattrz
+- GitHub: https://github.com/ronakabhattrz
+- Upwork: https://www.upwork.com/freelancers/~012a850ee7999e38f5

@@ -8,58 +8,37 @@ import {
   HiOutlinePaintBrush,
 } from "react-icons/hi2";
 
+import Faq from "../../components/Faq";
+import JsonLd from "../../components/JsonLd";
 import MajorClients from "../../components/MajorClients";
 import PageHeader from "../../components/PageHeader";
+import { faq } from "../../data/faq";
+import { services } from "../../data/services";
+import { breadcrumbJsonLd, faqJsonLd, servicesJsonLd } from "../../lib/schema";
 import { fadeIn } from "../../variants";
 
-export const serviceData = [
-  {
-    Icon: HiOutlineCodeBracket,
-    title: "Web development",
-    description:
-      "High-quality, professional builds, from Rails monoliths to React and Next.js front-ends.",
-    tags: ["Rails", "React", "Next.js"],
-  },
-  {
-    Icon: HiOutlinePaintBrush,
-    title: "Web design",
-    description:
-      "Modern, polished interfaces and landing pages designed to a professional standard.",
-    tags: ["Landing pages", "UI", "Responsive"],
-  },
-  {
-    Icon: HiOutlineArrowPath,
-    title: "Rails upgrades & maintenance",
-    description:
-      "Version upgrades on existing apps, tested so every existing feature keeps working afterwards.",
-    tags: ["Upgrades", "Heroku", "Testing"],
-  },
-  {
-    Icon: HiOutlineCircleStack,
-    title: "Backend & API architecture",
-    description:
-      "Maintainable data models, REST and GraphQL APIs, background jobs and integrations.",
-    tags: ["PostgreSQL", "GraphQL", "Redis"],
-  },
-  {
-    Icon: HiOutlineBolt,
-    title: "Performance tuning",
-    description:
-      "Profiling slow pages and queries, then fixing them so products stay fast as they grow.",
-    tags: ["Caching", "N+1", "Profiling"],
-  },
-  {
-    Icon: HiOutlineCog6Tooth,
-    title: "Code review & CI/CD",
-    description:
-      "Reviewing existing code, proposing refactors, and setting up modern delivery workflows.",
-    tags: ["Refactoring", "CI/CD", "Docker"],
-  },
-];
+const icons = {
+  "web-development": HiOutlineCodeBracket,
+  "web-design": HiOutlinePaintBrush,
+  "rails-upgrades": HiOutlineArrowPath,
+  "backend-api": HiOutlineCircleStack,
+  performance: HiOutlineBolt,
+  "code-review": HiOutlineCog6Tooth,
+};
+
+export const serviceData = services.map((s) => ({ ...s, Icon: icons[s.key] }));
 
 const Services = () => {
   return (
     <div className="container max-w-content">
+      <JsonLd
+        id="services"
+        data={[
+          breadcrumbJsonLd("/services", "Services"),
+          servicesJsonLd(),
+          faqJsonLd(faq),
+        ]}
+      />
       <PageHeader
         eyebrow="Services"
         title={
@@ -114,6 +93,8 @@ const Services = () => {
       </ul>
 
       <MajorClients />
+
+      <Faq items={faq} />
     </div>
   );
 };

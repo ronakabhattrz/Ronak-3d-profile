@@ -114,6 +114,17 @@ To start counting visitors and page views ([full docs](https://vercel.com/docs/a
 
 ---
 
+## AI lead assistant
+
+A chat widget ("Ask my AI") on every page answers visitor questions about services, experience, pricing and availability, then collects qualified leads (name, email, project summary, optional budget and timeline) and sends them to you automatically.
+
+- **Model:** Claude Opus 5 through the Anthropic SDK (`pages/api/chat.js`), low effort, cached system prompt, and server-side refusal fallbacks.
+- **Knowledge:** built from `data/services.js`, `data/faq.js`, `data/upworkCatalog.js` and `data/profile.js` (`lib/assistant.js`). Update those files and the assistant updates with them.
+- **Lead delivery:** every lead goes to the Formspree inbox used by the contact form, and optionally to `LEAD_WEBHOOK_URL` as JSON (Slack, Zapier, Make, n8n, a CRM).
+- **Analytics:** fires the GA4 `generate_lead` event (`method: ai_assistant` or `contact_form`) and `assistant_open`.
+
+Setup: add `ANTHROPIC_API_KEY` in Vercel → Project → Settings → Environment Variables, then redeploy. See `.env.example` for the optional variables. Without a key, the widget shows an "offline" message that links to the contact form.
+
 ## Project structure
 
 ```text

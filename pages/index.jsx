@@ -71,7 +71,8 @@ const Home = () => {
               className="mx-auto mt-7 max-w-xl space-y-4 text-base sm:text-lg lg:mx-0"
             >
               <p>
-                I&apos;m Ronak Bhatt, a full-stack developer with{" "}
+                I&apos;m Ronak Bhatt, a full-stack developer in London,
+                Ontario, with{" "}
                 <strong className="font-medium text-white">8+ years</strong> of
                 Ruby, Rails, React, Vue and Node. I build scalable web apps, tune
                 performance, and keep backend architecture maintainable.
