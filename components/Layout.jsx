@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -13,11 +12,6 @@ import {
   ogSocial,
 } from "../lib/seo";
 import { personJsonLd, siteMeta, websiteJsonLd } from "../lib/site";
-
-// Client-only: keeps the chat UI out of the server render and initial HTML
-const AssistantWidget = dynamic(() => import("../components/AssistantWidget"), {
-  ssr: false,
-});
 
 const geist = Geist({
   subsets: ["latin"],
@@ -113,7 +107,6 @@ const Layout = ({ children }) => {
 
       <Footer />
       <Nav />
-      <AssistantWidget />
     </div>
   );
 };
