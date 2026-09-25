@@ -35,6 +35,10 @@ Then check **Reports → Engagement → Landing page** to see which pages lead t
    - `https://www.ronakbhatt.in/resources/rails-upgrade-checklist`
 4. Check back in 2–4 weeks: **Performance** shows which searches find you.
 
+### Bing, Yandex and ChatGPT search (IndexNow)
+
+Already set up: after a deploy, run `npm run indexnow` to submit every sitemap URL to IndexNow (Bing, Yandex and others; Bing also powers ChatGPT search). The key file lives in `public/`.
+
 ## 3. Medium: make your site the original for each article (10 min, once)
 
 Articles now also live on your site at `/blog/<slug>`. For Google to credit **your** site rather than Medium, tell Medium the site is the original:
