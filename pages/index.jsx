@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { HiArrowDownTray, HiArrowRight } from "react-icons/hi2";
 
 import Avatar from "../components/Avatar";
@@ -35,6 +36,17 @@ const highlights = [
 ];
 
 const Home = () => {
+  // Particles are desktop-only decoration: mounting them only at xl+ means
+  // phones never download the tsparticles bundle.
+  const [showParticles, setShowParticles] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1200px)");
+    const update = () => setShowParticles(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   return (
     <>
       <section className="relative">
@@ -43,36 +55,30 @@ const Home = () => {
           aria-hidden
           className="pointer-events-none absolute inset-0 hidden opacity-70 xl:block [mask-image:radial-gradient(ellipse_at_70%_40%,#000_20%,transparent_70%)]"
         >
-          <ParticlesContainer />
+          {showParticles ? <ParticlesContainer /> : null}
         </div>
 
         <div className="container relative grid max-w-content items-center gap-14 pb-16 pt-32 sm:pt-40 lg:min-h-[100svh] lg:grid-cols-[1.3fr_0.7fr] lg:gap-10 lg:py-28">
           <div className="text-center lg:text-left">
-            <motion.div
-              variants={fadeIn("up", 0.05)}
-              initial="hidden"
-              animate="show"
-              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2.5 pr-4 text-xs font-medium text-zinc-300 backdrop-blur"
+            <div
+              className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2.5 pr-4 text-xs font-medium text-zinc-300 backdrop-blur"
+              style={{ animationDelay: "0.05s" }}
             >
               <span className="h-2 w-2 animate-pulse-dot rounded-full bg-emerald-400" />
               Taking on new projects
-            </motion.div>
+            </div>
 
-            <motion.h1
-              variants={fadeIn("up", 0.12)}
-              initial="hidden"
-              animate="show"
-              className="h1 mt-7"
+            <h1
+              className="animate-fade-up h1 mt-7"
+              style={{ animationDelay: "0.12s" }}
             >
               Ruby on Rails &amp; JS <br className="hidden sm:block" />
               full-stack <span className="em">that ships.</span>
-            </motion.h1>
+            </h1>
 
-            <motion.div
-              variants={fadeIn("up", 0.2)}
-              initial="hidden"
-              animate="show"
-              className="mx-auto mt-7 max-w-xl space-y-4 text-base sm:text-lg lg:mx-0"
+            <div
+              className="animate-fade-up mx-auto mt-7 max-w-xl space-y-4 text-base sm:text-lg lg:mx-0"
+              style={{ animationDelay: "0.2s" }}
             >
               <p>
                 I&apos;m Ronak Bhatt, a full-stack developer in London,
@@ -85,13 +91,11 @@ const Home = () => {
                 I enjoy complex problems, smoother development processes, and
                 reliable delivery for growing products.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={fadeIn("up", 0.28)}
-              initial="hidden"
-              animate="show"
-              className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+            <div
+              className="animate-fade-up mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+              style={{ animationDelay: "0.28s" }}
             >
               <Link href="/contact" className="btn-primary group">
                 Start a project
@@ -113,26 +117,22 @@ const Home = () => {
                 <HiArrowDownTray aria-hidden />
                 Resume
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={fadeIn("up", 0.34)}
-              initial="hidden"
-              animate="show"
-              className="mt-10 flex justify-center lg:justify-start"
+            <div
+              className="animate-fade-up mt-10 flex justify-center lg:justify-start"
+              style={{ animationDelay: "0.34s" }}
             >
               <Socials />
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            animate="show"
-            className="px-6 sm:px-10 lg:px-0"
+          <div
+            className="animate-fade-up px-6 sm:px-10 lg:px-0"
+            style={{ animationDelay: "0.2s" }}
           >
             <Avatar priority />
-          </motion.div>
+          </div>
         </div>
       </section>
 
