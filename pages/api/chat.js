@@ -5,7 +5,42 @@ import { deliverLead, isValidEmail } from "../../lib/leads";
 
 export const config = { maxDuration: 30 };
 
-const MODEL = process.env.ASSISTANT_MODEL || "claude-opus-5";
+/**
+ * Provider: Anthropic directly (ANTHROPIC_API_KEY) or OpenRouter's
+ * Anthropic-compatible Messages endpoint (OPENROUTER_API_KEY). Same SDK and
+ * request shape; OpenRouter uses its own model slug and doesn't accept
+ * Anthropic's server-side `fallbacks`, so that is only sent to Anthropic.
+ */
+const PROVIDER = process.env.ANTHROPIC_API_KEY
+  ? "anthropic"
+  : process.env.OPENROUTER_API_KEY
+    ? "openrouter"
+    : null;
+const MODEL =
+  process.env.ASSISTANT_MODEL ||
+  (PROVIDER === "openrouter" ? "anthropic/claude-opus-5" : "claude-opus-5");
+
+function createClient() {
+  if (PROVIDER === "openrouter") {
+    return new Anthropic({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseURL: "https://openrouter.ai/api",
+      defaultHeaders: { "HTTP-Referer": "https://www.ronakbhatt.in", "X-Title": "ronakbhatt.in assistant" },
+    });
+  }
+  return new Anthropic();
+}
+
+function createMessage(client, params) {
+  if (PROVIDER === "anthropic") {
+    return client.beta.messages.create({
+      ...params,
+      betas: ["server-side-fallback-2026-07-01"],
+      fallbacks: "default",
+    });
+  }
+  return client.messages.create(params);
+}
 const MAX_MESSAGES = 30;
 const MAX_CHARS_PER_MESSAGE = 2000;
 const MAX_TOOL_ROUNDS = 3;
@@ -59,13 +94,13 @@ export default async function handler(req, res) {
   // Lets the widget hide itself when no API key is configured
   if (req.method === "GET") {
     res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
-    return res.status(200).json({ enabled: Boolean(process.env.ANTHROPIC_API_KEY) });
+    return res.status(200).json({ enabled: Boolean(PROVIDER) });
   }
   if (req.method !== "POST") {
     res.setHeader("Allow", "GET, POST");
     return res.status(405).json({ error: "Method not allowed" });
   }
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!PROVIDER) {
     return res.status(503).json({ error: "Assistant is not configured" });
   }
 
@@ -95,16 +130,15 @@ export default async function handler(req, res) {
     });
   }
 
-  client ||= new Anthropic();
+  client ||= createClient();
   let leadCaptured = false;
 
   try {
     for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
-      const response = await client.beta.messages.create({
+      const response = await createMessage(client, {
         model: MODEL,
-        max_tokens: 4096,
-        betas: ["server-side-fallback-2026-07-01"],
-        fallbacks: "default",
+        // Chat replies are short; a tighter cap also keeps OpenRouter credit holds small
+        max_tokens: 1200,
         output_config: { effort: "low" },
         system: [
           {

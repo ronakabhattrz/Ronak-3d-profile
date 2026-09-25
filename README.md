@@ -123,7 +123,7 @@ A chat widget ("Ask my AI") on every page answers visitor questions about servic
 - **Lead delivery:** every lead goes to the Formspree inbox used by the contact form, and optionally to `LEAD_WEBHOOK_URL` as JSON (Slack, Zapier, Make, n8n, a CRM).
 - **Analytics:** fires the GA4 `generate_lead` event (`method: ai_assistant` or `contact_form`) and `assistant_open`.
 
-Setup: add `ANTHROPIC_API_KEY` in Vercel → Project → Settings → Environment Variables, then redeploy. See `.env.example` for the optional variables. Without a key, the widget shows an "offline" message that links to the contact form.
+Setup: add `ANTHROPIC_API_KEY` (Anthropic) **or** `OPENROUTER_API_KEY` (OpenRouter) in Vercel → Project → Settings → Environment Variables for Production and Preview, then redeploy. The widget stays hidden until one is set. See `.env.example` for the optional variables. Without a key, the widget shows an "offline" message that links to the contact form.
 
 ## Project structure
 
