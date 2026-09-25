@@ -1,35 +1,48 @@
 import Image from "next/image";
 import Link from "next/link";
-import Socials from "../components/Socials";
+import { useEffect, useState } from "react";
+import { HiArrowUpRight } from "react-icons/hi2";
+
+import { DesktopNav } from "../components/Nav";
 
 const Header = () => {
-  return (
-    <header className="absolute inset-x-0 top-0 z-40 w-full border-b border-white/[0.05] bg-primary/85 backdrop-blur-md">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-y-3 sm:gap-y-0 py-4 sm:py-5">
-          {/* logo */}
-          <Link href="/" className="inline-block shrink-0">
-            <Image
-              src="/logo.png"
-              alt="Ronak Bhatt — home"
-              width={220}
-              height={48}
-              priority
-              quality={86}
-              sizes="(max-width: 640px) 160px, 220px"
-            />
-          </Link>
+  const [scrolled, setScrolled] = useState(false);
 
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-5 gap-y-2 w-full sm:w-auto">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-accent hover:text-accent/90 transition-colors"
-            >
-              Blog
-            </Link>
-            <Socials />
-          </div>
-        </div>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+      <div
+        className={`mx-auto flex h-14 max-w-content items-center justify-between gap-4 rounded-full border pl-5 pr-2 transition-all duration-300 ${
+          scrolled
+            ? "border-white/10 bg-ink-900/75 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+            : "border-transparent bg-transparent"
+        }`}
+      >
+        <Link href="/" className="inline-flex shrink-0 items-center">
+          <Image
+            src="/logo.png"
+            alt="Ronak Bhatt — home"
+            width={1219}
+            height={126}
+            priority
+            quality={86}
+            sizes="150px"
+            className="h-auto w-[132px] sm:w-[150px]"
+          />
+        </Link>
+
+        <DesktopNav />
+
+        <Link href="/contact" className="btn-primary h-10 px-4 text-[13px]">
+          Let&apos;s talk
+          <HiArrowUpRight aria-hidden className="text-sm" />
+        </Link>
       </div>
     </header>
   );

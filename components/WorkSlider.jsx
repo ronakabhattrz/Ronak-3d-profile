@@ -1,6 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
-import { BsArrowUpRight } from "react-icons/bs";
+import { motion } from "framer-motion";
+import { HiArrowUpRight } from "react-icons/hi2";
+
+import { fadeIn } from "../variants";
 
 /**
  * Thumbnails: add files under /public/projects/ (see path per item).
@@ -43,59 +45,84 @@ const portfolioItems = [
   },
 ];
 
+const hostOf = (url) => new URL(url).hostname.replace(/^www\./, "");
+
+/**
+ * Large-screen tile width on a 6-column grid: the first two are wide (3 cols),
+ * the rest sit three to a row (2 cols), and any leftover tiles in the last row
+ * stretch so the grid has no gaps.
+ */
+const isWide = (i, total) => {
+  if (i < 2) return true;
+  const leftover = (total - 2) % 3;
+  return leftover === 2 && i >= total - 2;
+};
+const spanClass = (i, total) => {
+  if (isWide(i, total)) return "lg:col-span-3";
+  if ((total - 2) % 3 === 1 && i === total - 1) return "lg:col-span-6";
+  return "lg:col-span-2";
+};
+
 const WorkSlider = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 w-full">
-      {portfolioItems.map((image) => (
-        <article
-          key={image.title}
-          className="group flex flex-col rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] shadow-lg shadow-black/20 ring-1 ring-white/5 overflow-hidden transition-all duration-300 hover:border-accent/35 hover:shadow-[0_0_28px_rgba(241,48,36,0.1)]"
+    <ul className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-6">
+      {portfolioItems.map((item, i) => (
+        <motion.li
+          key={item.title}
+          variants={fadeIn("up", 0.04 * (i % 3))}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className={spanClass(i, portfolioItems.length)}
         >
-          <Link
-            href={image.link}
+          <a
+            href={item.link}
             target="_blank"
             rel="noreferrer noopener"
-            className="relative block w-full aspect-[16/11] lg:aspect-[4/3] overflow-hidden bg-black/25 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0f]"
+            className="card group block overflow-hidden p-2 transition-colors duration-300 hover:border-white/[0.16]"
           >
-            <Image
-              src={image.path}
-              alt={image.title}
-              fill
-              quality={78}
-              className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
             <div
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 sm:opacity-60 group-hover:opacity-90 transition-opacity"
-              aria-hidden
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-3.5 xl:p-4 flex items-end justify-between gap-2 sm:gap-3">
-              <h3 className="text-sm sm:text-base lg:text-sm xl:text-base font-semibold text-white leading-tight drop-shadow-sm line-clamp-2 pr-1">
-                {image.title}
-              </h3>
-              <span
-                className="inline-flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:border-accent/50 group-hover:bg-accent/15 group-hover:text-accent"
+              className={`relative w-full overflow-hidden rounded-[1.1rem] bg-ink-800 ${
+                isWide(i, portfolioItems.length) ? "aspect-[16/10]" : "aspect-[4/3]"
+              }`}
+            >
+              <Image
+                src={item.path}
+                alt={`${item.title} website`}
+                fill
+                quality={78}
+                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                sizes={
+                  isWide(i, portfolioItems.length)
+                    ? "(max-width: 640px) 100vw, (max-width: 960px) 50vw, 600px"
+                    : "(max-width: 640px) 100vw, (max-width: 960px) 50vw, 400px"
+                }
+              />
+              <div
                 aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+            </div>
+            <div className="flex items-center justify-between gap-3 px-3 pb-2 pt-4">
+              <div className="min-w-0">
+                <h3 className="truncate text-base font-semibold text-white">
+                  {item.title}
+                </h3>
+                <p className="truncate font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
+                  {hostOf(item.link)}
+                </p>
+              </div>
+              <span
+                aria-hidden
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-zinc-400 transition-all duration-300 group-hover:rotate-45 group-hover:border-accent group-hover:bg-accent group-hover:text-white"
               >
-                <BsArrowUpRight className="text-base sm:text-lg" />
+                <HiArrowUpRight />
               </span>
             </div>
-          </Link>
-
-          <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-t border-white/10 bg-black/20">
-            <Link
-              href={image.link}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-xs sm:text-sm font-medium text-accent/90 hover:text-accent transition-colors inline-flex items-center gap-1.5"
-            >
-              Visit live site
-              <BsArrowUpRight className="text-sm opacity-80" aria-hidden />
-            </Link>
-          </div>
-        </article>
+          </a>
+        </motion.li>
       ))}
-    </div>
+    </ul>
   );
 };
 

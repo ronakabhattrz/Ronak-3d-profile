@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import CountUp from "react-countup";
 import { FaCss3, FaHtml5, FaJs, FaReact } from "react-icons/fa";
 import {
   SiAmazonaws,
@@ -16,7 +14,8 @@ import {
 } from "react-icons/si";
 
 import Avatar from "../../components/Avatar";
-import Circles from "../../components/Circles";
+import PageHeader from "../../components/PageHeader";
+import Stats from "../../components/Stats";
 import { fadeIn } from "../../variants";
 
 export const aboutData = [
@@ -122,221 +121,190 @@ export const aboutData = [
   },
 ];
 
-const stats = [
-  { end: 69, label: "Projects done" },
-  { end: 65, label: "Happy clients" },
-  { end: 8, label: "Years experience" },
-  { end: 5, label: "Certifications" },
-];
+const section = (title) => aboutData.find((s) => s.title === title).info;
+
+const reveal = (delay = 0) => ({
+  variants: fadeIn("up", delay),
+  initial: "hidden",
+  whileInView: "show",
+  viewport: { once: true, margin: "-60px" },
+});
 
 const About = () => {
-  const [index, setIndex] = useState(0);
+  const skills = section("skills");
+  const experience = section("experience");
+  const certifications = section("certifications");
+  const credentials = section("credentials");
 
   return (
-    <div className="min-h-full overflow-x-hidden bg-primary/30">
-      <Circles />
-
-      <motion.div
-        variants={fadeIn("right", 0.2)}
-        initial="hidden"
-        animate="show"
-        exit="hidden"
-        className="hidden xl:flex absolute bottom-0 -left-[320px] pointer-events-none select-none"
-        aria-hidden
+    <div className="container max-w-content">
+      <PageHeader
+        eyebrow="About me"
+        title={
+          <>
+            Building reliable products, <span className="em">end to end.</span>
+          </>
+        }
       >
-        <Avatar />
-      </motion.div>
+        <p>
+          Web development expert with 8+ years across Ruby on Rails and the
+          modern JavaScript stack, working with teams in Canada, the US, the UK
+          and Europe.
+        </p>
+      </PageHeader>
 
-      <div className="container mx-auto max-w-7xl px-4 pt-28 pb-20 sm:px-6 sm:pt-24 sm:pb-28 lg:px-8 xl:pt-28 xl:pb-32">
-        <div className="flex flex-col xl:flex-row xl:items-start gap-10 xl:gap-14 xl:justify-between">
-          {/* Left: intro */}
-          <div className="flex-1 min-w-0 xl:max-w-[52%] text-center xl:text-left">
-            <motion.div
-              variants={fadeIn("right", 0.15)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="mb-3 inline-flex xl:block rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-accent"
-            >
-              Web Development Expert 🚀
-            </motion.div>
-
-            <motion.h1
-              variants={fadeIn("right", 0.2)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="h2 mb-6 xl:mb-8"
-            >
-              About <span className="text-accent">me</span>
-            </motion.h1>
-
-            <div className="mx-auto xl:mx-0 max-w-xl xl:max-w-none space-y-5 text-[15px] sm:text-base leading-relaxed">
-              <motion.p
-                className="text-white/80 font-light"
-                variants={fadeIn("right", 0.35)}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-              >
-                Hello! I am a highly experienced Ruby on Rails / JS full-stack
-                developer with a strong focus on writing clean and efficient
-                code. With 8+ years of experience, I bring a wealth of
-                expertise to the table. If you are searching for an expert who
-                perfectly matches my skill set, look no further. I am here to
-                provide comprehensive solutions tailored to your specific
-                workflow needs and to help you integrate them with the latest
-                technologies to boost your business productivity.
-              </motion.p>
-              <motion.p
-                className="text-white/80 font-light"
-                variants={fadeIn("right", 0.4)}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-              >
-                I am a full stack developer with skills in Ruby, Ruby on Rails,
-                JavaScript, ReactJS, VueJS, and NodeJS; I build web features and
-                relevant products for businesses. Over 8+ years of full-stack work, I have
-                acquired teamwork, problem-solving, and exceptional communication
-                skills from coding with full-stack development colleagues around
-                the world.
-              </motion.p>
-              <motion.p
-                className="text-white/80 font-light"
-                variants={fadeIn("right", 0.45)}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-              >
-                As a creative developer, I am motivated by the rigorous, logical
-                thought processes combining software development with imagination
-                and expression. Additionally, I have extensive experience in
-                upgrading RoR in an existing application; testing and ensuring
-                all existing functions work after the upgrade. My ability to
-                review and understand existing code, and propose refactoring and
-                CI/CD, enables me to accept any challenge; and I thrive on
-                contributing to strong team chemistry.
-              </motion.p>
-              <motion.p
-                className="text-white/80 font-light"
-                variants={fadeIn("right", 0.5)}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-              >
-                I am eager to explore exciting full-stack development
-                opportunities in startups as well as established companies that
-                think I am a good match for current roles. Please reach out if you
-                are seeking a passionate and capable web dev team member.
-              </motion.p>
-            </div>
-
-            <motion.div
-              variants={fadeIn("right", 0.55)}
-              initial="hidden"
-              animate="show"
-              className="mt-10 xl:mt-12 rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-5 sm:p-6"
-            >
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                {stats.map((s) => (
-                  <div
-                    key={s.label}
-                    className="text-center xl:text-left"
-                  >
-                    <div className="text-3xl sm:text-4xl xl:text-[2.5rem] font-extrabold text-accent tabular-nums leading-none mb-2">
-                      <CountUp start={0} end={s.end} duration={2.5} enableScrollSpy scrollSpyOnce />
-                    </div>
-                    <div className="text-[10px] sm:text-xs uppercase tracking-wider text-white/45 leading-snug max-w-[9rem] mx-auto xl:mx-0">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+      <div className="grid gap-4 lg:grid-cols-12">
+        <motion.div {...reveal()} className="card p-7 sm:p-10 lg:col-span-7">
+          <div className="space-y-5 text-[15px] sm:text-base">
+            <p>
+              Hello! I am a highly experienced Ruby on Rails / JS full-stack
+              developer with a strong focus on writing clean and efficient code.
+              I provide comprehensive solutions tailored to your specific
+              workflow needs and help you integrate them with the latest
+              technologies to boost your business productivity.
+            </p>
+            <p>
+              I build web features and products for businesses with Ruby, Ruby
+              on Rails, JavaScript, ReactJS, VueJS, and NodeJS. Coding with
+              full-stack colleagues around the world has sharpened my teamwork,
+              problem-solving, and communication.
+            </p>
+            <p>
+              As a creative developer, I am motivated by the rigorous, logical
+              thought processes combining software development with imagination
+              and expression. I have extensive experience upgrading Rails in
+              existing applications, testing and ensuring all existing functions
+              work after the upgrade. Reviewing and understanding existing code,
+              and proposing refactoring and CI/CD, lets me take on any challenge,
+              and I thrive on contributing to strong team chemistry.
+            </p>
+            <p>
+              I am eager to explore full-stack opportunities in startups as well
+              as established companies. Please reach out if you are seeking a
+              passionate and capable web dev team member.
+            </p>
           </div>
+        </motion.div>
 
-          {/* Right: tabs + content card */}
-          <motion.div
-            variants={fadeIn("left", 0.35)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="w-full xl:w-[min(100%,440px)] xl:flex-shrink-0 flex flex-col gap-4"
-          >
-            <div
-              className="flex flex-wrap justify-center xl:justify-start gap-2"
-              role="tablist"
-              aria-label="About sections"
-            >
-              {aboutData.map((item, itemI) => (
-                <button
-                  key={item.title}
-                  type="button"
-                  role="tab"
-                  aria-selected={index === itemI}
-                  className={`rounded-full px-3.5 py-2 text-xs sm:text-sm font-medium capitalize transition-all duration-300 border ${
-                    index === itemI
-                      ? "border-accent bg-accent/15 text-accent shadow-[0_0_20px_rgba(241,48,36,0.15)]"
-                      : "border-white/15 bg-white/[0.04] text-white/65 hover:border-white/25 hover:text-white/90"
-                  }`}
-                  onClick={() => setIndex(itemI)}
-                >
-                  {item.title}
-                </button>
-              ))}
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm shadow-[0_8px_40px_rgba(0,0,0,0.25)] flex flex-col min-h-[280px] max-h-[min(520px,calc(100vh-12rem))] xl:max-h-[min(580px,calc(100vh-10rem))]">
-              <div className="px-4 sm:px-5 py-3 border-b border-white/10 shrink-0">
-                <h3 className="text-sm font-semibold text-white/90 capitalize tracking-wide">
-                  {aboutData[index].title}
-                </h3>
-              </div>
-              <div className="about-scroll overflow-y-auto overflow-x-hidden p-4 sm:p-5 flex-1 min-h-0">
-                <ul className="space-y-0 divide-y divide-white/10">
-                  {aboutData[index].info.map((item, itemI) => (
-                    <li
-                      key={itemI}
-                      className="py-4 first:pt-0 last:pb-0 text-center xl:text-left"
-                    >
-                      {item.icons ? (
-                        <>
-                          <p className="text-sm font-medium text-white/90 mb-3">
-                            {item.title}
-                          </p>
-                          <div className="flex flex-wrap justify-center xl:justify-start gap-3">
-                            {item.icons.map(({ Icon, name }, iconI) => (
-                              <span
-                                key={iconI}
-                                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] text-xl text-white hover:border-accent/40 hover:text-accent transition-colors"
-                                title={name}
-                                aria-label={name}
-                              >
-                                <Icon aria-hidden />
-                              </span>
-                            ))}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <p className="text-sm font-medium text-white/90 leading-snug mb-1.5">
-                            {item.title}
-                          </p>
-                          <p className="text-xs sm:text-sm text-white/50 leading-relaxed">
-                            {item.stage}
-                          </p>
-                        </>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        <motion.div {...reveal(0.08)} className="lg:col-span-5">
+          <Avatar showChips={false} className="max-w-none" />
+        </motion.div>
       </div>
 
+      <Stats className="mt-4" />
+
+      {/* Experience */}
+      <section aria-labelledby="experience-heading" className="mt-24 grid gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <p className="eyebrow">Career</p>
+          <h2 id="experience-heading" className="h3 mt-4">
+            Experience
+          </h2>
+          <p className="mt-3 max-w-sm text-[15px]">
+            From freelance Rails work to leading teams, remote and on-site.
+          </p>
+        </div>
+        <ol className="relative lg:col-span-8">
+          <span
+            aria-hidden
+            className="absolute bottom-3 left-[7px] top-3 w-px bg-gradient-to-b from-accent/60 via-white/10 to-transparent"
+          />
+          {experience.map((job, i) => {
+            const [role, company] = job.title.split(" — ");
+            const [when, ...rest] = job.stage.split(" · ");
+            return (
+              <motion.li
+                key={job.title}
+                {...reveal(0.04 * i)}
+                className="relative pb-8 pl-10 last:pb-0"
+              >
+                <span
+                  aria-hidden
+                  className={`absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-2 ${
+                    i === 0
+                      ? "border-accent bg-accent/30 shadow-[0_0_0_4px_rgba(241,48,36,0.15)]"
+                      : "border-white/25 bg-ink-950"
+                  }`}
+                />
+                <div className="card card-hover p-5 sm:p-6">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                    <h3 className="text-base font-semibold text-white sm:text-lg">
+                      {role}
+                      {company ? (
+                        <span className="font-normal text-zinc-400"> · {company}</span>
+                      ) : null}
+                    </h3>
+                    <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
+                      {when}
+                    </span>
+                  </div>
+                  {rest.length ? (
+                    <p className="mt-2 text-sm">{rest.join(" · ")}</p>
+                  ) : null}
+                </div>
+              </motion.li>
+            );
+          })}
+        </ol>
+      </section>
+
+      {/* Skills */}
+      <section aria-labelledby="skills-heading" className="mt-24 grid gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <p className="eyebrow">Toolbox</p>
+          <h2 id="skills-heading" className="h3 mt-4">
+            Skills
+          </h2>
+        </div>
+        <div className="grid gap-4 lg:col-span-8 md:grid-cols-2">
+          {skills.map((group, gi) => (
+            <motion.div key={group.title} {...reveal(0.06 * gi)} className="card p-6">
+              <h3 className="text-sm font-semibold text-white">{group.title}</h3>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {group.icons.map(({ Icon, name }) => (
+                  <li
+                    key={name}
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-zinc-300 transition-colors hover:border-accent/40 hover:text-white"
+                  >
+                    <Icon aria-hidden className="text-base text-zinc-400" />
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Certifications + education */}
+      <div className="mb-24 mt-24 grid gap-4 md:grid-cols-2">
+        {[
+          { id: "certs", label: "Recognition", heading: "Certifications", items: certifications },
+          { id: "edu", label: "Education", heading: "Credentials", items: credentials },
+        ].map((block, bi) => (
+          <motion.section
+            key={block.id}
+            {...reveal(0.06 * bi)}
+            aria-labelledby={`${block.id}-heading`}
+            className="card p-7 sm:p-8"
+          >
+            <p className="eyebrow">{block.label}</p>
+            <h2 id={`${block.id}-heading`} className="mt-4 text-xl font-semibold text-white">
+              {block.heading}
+            </h2>
+            <ul className="mt-6 divide-y divide-white/[0.07]">
+              {block.items.map((item) => (
+                <li key={item.title} className="flex items-start justify-between gap-4 py-4 first:pt-0 last:pb-0">
+                  <span className="text-[15px] leading-snug text-zinc-200">{item.title}</span>
+                  <span className="shrink-0 text-right font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">
+                    {item.stage}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.section>
+        ))}
+      </div>
     </div>
   );
 };
