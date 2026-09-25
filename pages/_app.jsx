@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import Script from "next/script";
 import { useRouter } from "next/router";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -40,13 +40,28 @@ function MyApp({ Component, pageProps }) {
         `}
       </Script>
 
-      <Layout>
-        <AnimatePresence mode="wait">
-          <motion.div key={router.route} className="min-h-full w-full">
-            <Component {...pageProps} />
-          </motion.div>
-        </AnimatePresence>
-      </Layout>
+      <MotionConfig reducedMotion="user">
+        <Layout>
+          <AnimatePresence
+            mode="wait"
+            initial={false}
+            onExitComplete={() =>
+              window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+            }
+          >
+            <motion.div
+              key={router.route}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full"
+            >
+              <Component {...pageProps} />
+            </motion.div>
+          </AnimatePresence>
+        </Layout>
+      </MotionConfig>
       <VercelAnalytics />
       <SpeedInsights />
     </>

@@ -30,52 +30,72 @@ export const navData = [
   },
 ];
 
+/** Desktop: inline text links rendered inside the header pill. */
+export const DesktopNav = () => {
+  const { pathname = "/" } = useRouter();
+
+  return (
+    <nav aria-label="Primary" className="hidden xl:block">
+      <ul className="flex items-center gap-1">
+        {navData.map((item) => {
+          const active = item.path === pathname;
+          return (
+            <li key={item.path}>
+              <Link
+                href={item.path}
+                aria-current={active ? "page" : undefined}
+                className={`relative rounded-full px-3.5 py-2 text-[13px] font-medium capitalize transition-colors ${
+                  active
+                    ? "bg-white/[0.08] text-white"
+                    : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                {item.name}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};
+
+/** Mobile / tablet: bottom dock with icon + label. */
 const Nav = () => {
-  const router = useRouter();
-  const pathname = router.pathname || "/";
+  const { pathname = "/" } = useRouter();
 
   return (
     <nav
-      className="flex flex-col items-center justify-end xl:justify-center gap-y-4 fixed z-50 w-full inset-x-0 bottom-0 top-auto h-auto xl:inset-x-auto xl:right-[2%] xl:top-0 xl:bottom-0 xl:w-16 xl:max-w-md xl:h-screen pointer-events-none xl:pointer-events-auto"
       aria-label="Primary"
+      className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] xl:hidden"
     >
-      <div className="pointer-events-auto flex w-full xl:flex-col items-center justify-between xl:justify-center gap-y-10 px-4 md:px-40 xl:px-0 min-h-[72px] sm:min-h-[80px] xl:h-max py-3 sm:py-4 xl:py-8 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] xl:pb-8 bg-white/10 backdrop-blur-md border-t border-white/[0.08] xl:border-t-0 text-3xl xl:text-xl xl:rounded-full">
-        {navData.map((item, i) => {
+      <ul className="mx-auto flex max-w-lg items-center justify-between rounded-2xl border border-white/10 bg-ink-900/85 p-1.5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+        {navData.map((item) => {
           const active = item.path === pathname;
           const Icon = item.Icon;
           return (
-            <Link
-              className={`relative flex items-center transition-all duration-300 hover:text-accent ${
-                active ? "text-accent" : "text-white/90"
-              } group`}
-              href={item.path}
-              key={i}
-              aria-current={active ? "page" : undefined}
-            >
-              <span className="sr-only">{item.name}</span>
-              <div
-                role="tooltip"
-                className="absolute right-0 hidden pr-14 xl:group-hover:flex"
+            <li key={item.path} className="flex-1">
+              <Link
+                href={item.path}
+                aria-current={active ? "page" : undefined}
+                className={`flex flex-col items-center gap-1 rounded-xl py-2 text-[10px] font-medium capitalize transition-colors ${
+                  active
+                    ? "bg-white/[0.08] text-white"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
               >
-                <div className="relative flex items-center rounded-[3px] bg-white p-[6px] text-primary">
-                  <div className="text-[12px] font-semibold capitalize leading-none">
-                    {item.name}
-                  </div>
-
-                  <div
-                    className="absolute -right-2 border-y-[6px] border-l-8 border-r-0 border-solid border-y-transparent border-l-white"
-                    aria-hidden
-                  />
-                </div>
-              </div>
-
-              <span aria-hidden className="flex">
-                <Icon />
-              </span>
-            </Link>
+                <Icon
+                  aria-hidden
+                  className={`text-lg ${active ? "text-accent" : ""}`}
+                />
+                <span className="max-[380px]:sr-only">
+                  {item.name === "testimonials" ? "reviews" : item.name}
+                </span>
+              </Link>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </nav>
   );
 };

@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { HiOutlineClock } from "react-icons/hi2";
+import { HiArrowUpRight, HiOutlineClock } from "react-icons/hi2";
 
 import {
   upworkCatalogIntro,
@@ -9,86 +8,72 @@ import {
 } from "../data/upworkCatalog";
 import { fadeIn } from "../variants";
 
-const UpworkProjectCatalog = ({ isFirst = false }) => {
+const UpworkProjectCatalog = () => {
   return (
-    <motion.section
-      variants={fadeIn("up", 0.25)}
-      initial="hidden"
-      animate="show"
-      exit="hidden"
-      className={
-        isFirst
-          ? "w-full"
-          : "w-full mt-16 border-t border-white/10 pt-12 sm:mt-20 sm:pt-14 xl:mt-24"
-      }
-      aria-labelledby="upwork-catalog-heading"
-    >
-      <h2
-        id="upwork-catalog-heading"
-        className="text-xl sm:text-2xl font-semibold text-center xl:text-left mb-3"
-      >
-        Project <span className="text-accent">catalog</span>
-      </h2>
-      <p className="text-sm sm:text-base text-white/65 text-center xl:text-left max-w-2xl mb-8 sm:mb-10">
-        {upworkCatalogIntro}
-      </p>
+    <section className="my-24" aria-labelledby="upwork-catalog-heading">
+      <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="eyebrow">Fixed-price packages</p>
+          <h2 id="upwork-catalog-heading" className="h3 mt-4">
+            Project <span className="em">catalog</span>
+          </h2>
+        </div>
+        <p className="max-w-md text-[15px]">{upworkCatalogIntro}</p>
+      </div>
 
-      <ul className="flex flex-col gap-5 sm:gap-6 list-none p-0 m-0">
-        {upworkCatalogItems.map((item) => (
-          <li key={item.href}>
-            <article className="group flex flex-col md:flex-row md:items-stretch rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] shadow-lg shadow-black/25 ring-1 ring-white/5 overflow-hidden transition-all duration-300 hover:border-accent/30 hover:shadow-[0_0_32px_rgba(241,48,36,0.08)]">
-              <div className="relative w-full md:w-[min(42%,280px)] md:shrink-0 aspect-[16/10] md:aspect-auto md:min-h-[200px] bg-black/30">
+      <ul className="grid gap-4 md:grid-cols-3">
+        {upworkCatalogItems.map((item, i) => (
+          <motion.li
+            key={item.href}
+            variants={fadeIn("up", 0.05 * i)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            <article className="card card-hover group flex h-full flex-col overflow-hidden p-2">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.1rem] bg-ink-800">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
                   quality={78}
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02] md:group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 280px"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  sizes="(max-width: 768px) 100vw, 400px"
                 />
+                <span className="absolute left-3 top-3 rounded-full bg-ink-950/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur">
+                  {item.priceLabel}
+                </span>
               </div>
 
-              <div className="flex flex-1 flex-col justify-between gap-4 p-5 sm:p-6 md:py-6 md:pr-6 md:pl-8">
-                <div>
-                  <h4 className="text-base sm:text-lg font-semibold text-white leading-snug mb-3 pr-1">
-                    {item.title}
-                  </h4>
-                  {item.description ? (
-                    <p className="text-sm text-white/60 leading-relaxed max-w-xl">
-                      {item.description}
-                    </p>
-                  ) : null}
-                </div>
+              <div className="flex flex-1 flex-col p-4 pt-5">
+                <h3 className="text-base font-semibold leading-snug text-white">
+                  {item.title}
+                </h3>
+                {item.description ? (
+                  <p className="mt-2 text-sm">{item.description}</p>
+                ) : null}
 
-                <div className="flex flex-wrap items-center gap-3 sm:gap-5">
-                  <span className="inline-flex items-center rounded-lg border border-accent/25 bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent">
-                    {item.priceLabel}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 text-sm text-white/55">
-                    <HiOutlineClock
-                      className="text-lg text-white/40 shrink-0"
-                      aria-hidden
-                    />
+                <div className="mt-auto flex items-center justify-between gap-3 pt-6">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-zinc-400">
+                    <HiOutlineClock className="text-base" aria-hidden />
                     {item.deliveryLabel}
                   </span>
-                </div>
-
-                <div className="pt-1">
-                  <Link
+                  <a
                     href={item.href}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/[0.06] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-white transition-colors hover:text-accent"
                   >
                     View on Upwork
-                  </Link>
+                    <HiArrowUpRight aria-hidden />
+                  </a>
                 </div>
               </div>
             </article>
-          </li>
+          </motion.li>
         ))}
       </ul>
-    </motion.section>
+    </section>
   );
 };
 

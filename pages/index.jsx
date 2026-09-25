@@ -1,10 +1,13 @@
 import dynamic from "next/dynamic";
-import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { HiArrowDownTray, HiArrowRight } from "react-icons/hi2";
 
-import ProjectsBtn from "../components/ProjectsBtn";
 import Avatar from "../components/Avatar";
-
+import Socials from "../components/Socials";
+import Stats from "../components/Stats";
+import { stackTicker } from "../data/profile";
+import { siteMeta } from "../lib/site";
 import { fadeIn } from "../variants";
 
 const ParticlesContainer = dynamic(
@@ -12,124 +15,172 @@ const ParticlesContainer = dynamic(
   { ssr: false }
 );
 
+const highlights = [
+  {
+    title: "Backend that scales",
+    text: "Rails architecture, APIs and data models built to stay maintainable as the product grows.",
+  },
+  {
+    title: "Front-ends people enjoy",
+    text: "React, Vue and Next.js interfaces that are fast, accessible and pleasant to use.",
+  },
+  {
+    title: "Upgrades without drama",
+    text: "Rails version upgrades, refactors and CI/CD, with every existing feature still working afterwards.",
+  },
+];
+
 const Home = () => {
   return (
-    <div className="relative min-h-full overflow-hidden bg-primary">
-      {/* Full-bleed red atmosphere (one layer — avoids a separate “box” panel) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary via-[#1a1018] to-[#3a141c]"
-      />
-      {/* Explosion art + network glow — mobile/tablet only; desktop uses the xl hero strip */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 max-xl:block xl:hidden bg-explosion bg-cover bg-[center_30%] bg-no-repeat opacity-[0.28] mix-blend-color-dodge"
-      />
-      <div className="relative z-10 min-h-full w-full">
-        <div className="container mx-auto flex min-h-[calc(100dvh-5.5rem)] max-xl:min-h-[calc(100dvh-10.5rem)] flex-col justify-center gap-6 px-4 pt-28 pb-8 text-center sm:gap-8 sm:px-6 sm:py-10 xl:gap-8 xl:py-12 xl:text-left">
-          {/* title */}
-          <motion.h1
-            variants={fadeIn("down", 0.2)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="h1"
-          >
-            Ruby on Rails &amp; JS <br />
-            <span className="text-accent">Full-stack</span> that ships
-          </motion.h1>
+    <>
+      <section className="relative">
+        {/* Particle field — desktop only, sits behind the hero */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 hidden opacity-70 xl:block [mask-image:radial-gradient(ellipse_at_70%_40%,#000_20%,transparent_70%)]"
+        >
+          <ParticlesContainer />
+        </div>
 
-          {/* subtitle */}
-          <motion.div
-            variants={fadeIn("down", 0.3)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="mx-auto max-w-md space-y-4 text-[17px] leading-relaxed text-white/65 sm:text-[18px] xl:mx-0 xl:max-w-xl"
-          >
-            <p>
-              I&apos;m Ronak Bhatt — a Ruby on Rails and JavaScript full-stack
-              developer with <strong className="font-medium text-white/80">8+ years</strong>{" "}
-              in the stack. I focus on clean, efficient code and ship features with
-              Ruby, Rails, React, Vue, and Node, and I help teams adopt modern
-              workflows.
-            </p>
-            <p>
-              I specialize in scalable web apps, performance tuning, and
-              maintainable backend architecture. I enjoy complex problems,
-              smoother development processes, and reliable delivery for growing
-              products.
-            </p>
-            <p className="hidden md:block">
-              Clean code and modern tooling matter to me; I keep exploring tech
-              that helps ship faster and better
-              {"."}
-            </p>
-          </motion.div>
+        <div className="container relative grid max-w-content items-center gap-14 pb-16 pt-32 sm:pt-40 lg:min-h-[100svh] lg:grid-cols-[1.3fr_0.7fr] lg:gap-10 lg:py-28">
+          <div className="text-center lg:text-left">
+            <motion.div
+              variants={fadeIn("up", 0.05)}
+              initial="hidden"
+              animate="show"
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] py-1.5 pl-2.5 pr-4 text-xs font-medium text-zinc-300 backdrop-blur"
+            >
+              <span className="h-2 w-2 animate-pulse-dot rounded-full bg-emerald-400" />
+              Open to new opportunities
+            </motion.div>
 
-          {/* avatar — tablet only (md–xl); hidden on phones; xl+ uses large art panel */}
-          <motion.div
-            variants={fadeIn("up", 0.35)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="relative z-10 hidden justify-center md:flex xl:hidden"
-          >
-            <Avatar />
-          </motion.div>
+            <motion.h1
+              variants={fadeIn("up", 0.12)}
+              initial="hidden"
+              animate="show"
+              className="h1 mt-7"
+            >
+              Ruby on Rails &amp; JS <br className="hidden sm:block" />
+              full-stack <span className="em">that ships.</span>
+            </motion.h1>
 
-          {/* projects link — centered with balanced space (mobile); desktop in flow */}
+            <motion.div
+              variants={fadeIn("up", 0.2)}
+              initial="hidden"
+              animate="show"
+              className="mx-auto mt-7 max-w-xl space-y-4 text-base sm:text-lg lg:mx-0"
+            >
+              <p>
+                I&apos;m Ronak Bhatt, a full-stack developer with{" "}
+                <strong className="font-medium text-white">8+ years</strong> of
+                Ruby, Rails, React, Vue and Node. I build scalable web apps, tune
+                performance, and keep backend architecture maintainable.
+              </p>
+              <p className="hidden sm:block">
+                I enjoy complex problems, smoother development processes, and
+                reliable delivery for growing products.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn("up", 0.28)}
+              initial="hidden"
+              animate="show"
+              className="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+            >
+              <Link href="/work" className="btn-primary group">
+                View my work
+                <HiArrowRight
+                  aria-hidden
+                  className="transition-transform group-hover:translate-x-0.5"
+                />
+              </Link>
+              <a
+                href={siteMeta.resumeUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="btn-ghost"
+              >
+                <HiArrowDownTray aria-hidden />
+                Resume
+              </a>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn("up", 0.34)}
+              initial="hidden"
+              animate="show"
+              className="mt-10 flex justify-center lg:justify-start"
+            >
+              <Socials />
+            </motion.div>
+          </div>
+
           <motion.div
-            variants={fadeIn("up", 0.4)}
+            variants={fadeIn("up", 0.2)}
             initial="hidden"
             animate="show"
-            exit="hidden"
-            className="flex w-full justify-center py-8 max-xl:py-10 xl:hidden"
+            className="px-6 sm:px-10 lg:px-0"
           >
-            <ProjectsBtn />
-          </motion.div>
-          <motion.div
-            variants={fadeIn("down", 0.4)}
-            initial="hidden"
-            animate="show"
-            exit="hidden"
-            className="hidden xl:flex xl:justify-start"
-          >
-            <ProjectsBtn />
+            <Avatar priority />
           </motion.div>
         </div>
-      </div>
-      {/* Desktop-only: optimized LCP image + particles (canvas client-only) */}
-      <div className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-[1280px] xl:block">
-        <Image
-          src="/bg-explosion.png"
-          alt=""
-          fill
-          priority
-          fetchPriority="high"
-          quality={68}
-          sizes="1280px"
-          className="object-cover object-right mix-blend-color-dodge"
-          aria-hidden
-        />
+      </section>
 
-        <ParticlesContainer />
+      {/* Tech ticker */}
+      <section aria-label="Tech stack" className="relative border-y border-white/[0.06] bg-ink-900/60 py-5">
+        <div className="mask-x overflow-hidden">
+          <ul className="flex w-max animate-marquee gap-10 pr-10 hover:[animation-play-state:paused]">
+            {[...stackTicker, ...stackTicker].map((tech, i) => (
+              <li
+                key={`${tech}-${i}`}
+                aria-hidden={i >= stackTicker.length}
+                className="flex items-center gap-10 whitespace-nowrap font-mono text-sm uppercase tracking-[0.16em] text-zinc-400"
+              >
+                {tech}
+                <span className="h-1 w-1 rounded-full bg-accent/70" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-        <motion.div
-          variants={fadeIn("up", 0.5)}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className="absolute bottom-0 right-[8%] z-[1] hidden max-h-[678px] w-full max-w-[737px] items-end xl:flex"
-        >
-          <Avatar
-            priority
-            sizes="min(737px, 42vw)"
-          />
-        </motion.div>
-      </div>
-    </div>
+      <section className="container max-w-content py-20 sm:py-28">
+        <div className="mb-10 flex flex-col gap-4 sm:mb-14 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="eyebrow">What I bring</p>
+            <h2 className="h3 mt-4 max-w-xl sm:text-4xl">
+              Clean code, modern tooling, <span className="em">reliable delivery.</span>
+            </h2>
+          </div>
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 text-sm font-medium text-zinc-300 transition-colors hover:text-white"
+          >
+            All services <HiArrowRight aria-hidden />
+          </Link>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {highlights.map((h, i) => (
+            <motion.article
+              key={h.title}
+              variants={fadeIn("up", 0.05 * i)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-60px" }}
+              className="card card-hover p-7"
+            >
+              <span className="font-mono text-xs text-accent">0{i + 1}</span>
+              <h3 className="mt-6 text-lg font-semibold text-white">{h.title}</h3>
+              <p className="mt-2 text-[15px]">{h.text}</p>
+            </motion.article>
+          ))}
+        </div>
+
+        <Stats className="mt-4" />
+      </section>
+    </>
   );
 };
 

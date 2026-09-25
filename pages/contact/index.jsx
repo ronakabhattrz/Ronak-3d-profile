@@ -1,9 +1,46 @@
 import { motion } from "framer-motion";
-import { BsArrowRight } from "react-icons/bs";
 import { useState } from "react";
+import {
+  HiArrowRight,
+  HiArrowUpRight,
+  HiCheckCircle,
+  HiOutlineDocumentArrowDown,
+  HiOutlineEnvelope,
+  HiOutlineMapPin,
+  HiOutlinePhone,
+} from "react-icons/hi2";
 
+import PageHeader from "../../components/PageHeader";
+import Socials from "../../components/Socials";
 import { fadeIn } from "../../variants";
 import { siteMeta } from "../../lib/site";
+
+const channels = [
+  {
+    Icon: HiOutlineEnvelope,
+    label: "Email",
+    value: "ronakabhattrz@gmail.com",
+    href: "mailto:ronakabhattrz@gmail.com",
+  },
+  {
+    Icon: HiOutlinePhone,
+    label: "Phone",
+    value: "+1 (817) 947-5211",
+    href: "tel:+18179475211",
+  },
+  {
+    Icon: HiOutlineMapPin,
+    label: "Based in",
+    value: "London, Ontario, Canada",
+  },
+  {
+    Icon: HiOutlineDocumentArrowDown,
+    label: "Resume",
+    value: "Download PDF",
+    href: siteMeta.resumeUrl,
+    external: true,
+  },
+];
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +56,13 @@ const Contact = () => {
     const fullname = form.fullname.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
+    // Honeypot: real users never see or fill this field
+    if (form._gotcha.value) {
+      setIsLoading(false);
+      setSent(true);
+      form.reset();
+      return;
+    }
 
     try {
       const res = await fetch(`https://formspree.io/f/${siteMeta.formspreeId}`, {
@@ -52,171 +96,197 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-full bg-primary/30">
-      <div className="container mx-auto py-24 xl:py-32 text-center xl:text-left">
-        <div className="flex flex-col xl:flex-row gap-12 xl:gap-16 max-w-6xl mx-auto items-start justify-center">
-          <div className="flex-1 w-full max-w-[700px] mx-auto xl:mx-0">
-            <motion.h1
-              variants={fadeIn("up", 0.2)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="h2 text-center xl:text-left mb-8"
-            >
-              Let&apos;s <span className="text-accent">connect.</span>
-            </motion.h1>
+    <div className="container max-w-content">
+      <PageHeader
+        eyebrow="Contact"
+        title={
+          <>
+            Let&apos;s <span className="em">connect.</span>
+          </>
+        }
+      >
+        <p>
+          Tell me about your project, team or role, or reach out directly on
+          any of the channels below.
+        </p>
+      </PageHeader>
 
-            <motion.div
-              variants={fadeIn("up", 0.25)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="text-white/70 mb-8 text-sm sm:text-base space-y-3 text-center xl:text-left"
-            >
-              <p className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-x-2 justify-center xl:justify-start">
-                <a
-                  href="mailto:ronakabhattrz@gmail.com"
-                  className="hover:text-accent transition-colors"
-                >
-                  ronakabhattrz@gmail.com
-                </a>
-                <span className="hidden sm:inline text-white/40">·</span>
-                <a
-                  href="tel:+18179475211"
-                  className="hover:text-accent transition-colors"
-                >
-                  +1 (817) 947-5211
-                </a>
-              </p>
-              <p>London, Ontario, Canada</p>
-              <p>
-                <a
-                  href={siteMeta.resumeUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="text-accent hover:underline"
-                >
-                  Download resume (PDF)
-                </a>
-              </p>
-            </motion.div>
+      <div className="mb-24 grid gap-4 lg:grid-cols-12">
+        {/* Left: channels + map */}
+        <motion.div
+          variants={fadeIn("up", 0.1)}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col gap-4 lg:col-span-5"
+        >
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {channels.map(({ Icon, label, value, href, external }) => {
+              const inner = (
+                <>
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-xl text-accent">
+                    <Icon aria-hidden />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-400">
+                      {label}
+                    </span>
+                    <span className="block truncate text-[15px] text-white">
+                      {value}
+                    </span>
+                  </span>
+                  {href ? (
+                    <HiArrowUpRight
+                      aria-hidden
+                      className="shrink-0 text-zinc-500 transition-colors group-hover:text-accent"
+                    />
+                  ) : null}
+                </>
+              );
+              const cls = "card flex items-center gap-4 p-4";
+              return (
+                <li key={label}>
+                  {href ? (
+                    <a
+                      href={href}
+                      {...(external
+                        ? { target: "_blank", rel: "noreferrer noopener" }
+                        : {})}
+                      className={`${cls} card-hover group`}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <div className={cls}>{inner}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
 
-            <motion.div
-              variants={fadeIn("up", 0.3)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="mb-10 rounded-lg overflow-hidden border border-white/10 aspect-[4/3] max-h-[280px] w-full"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93245.63184717782!2d-81.32895606875188!3d42.98632343104216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef20eaee30000%3A0x4030ebaa8223060!2sLondon%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sca!4v1738281600000!5m2!1sen!2sca"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: "260px" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="London, Ontario, Canada — map"
-              />
-            </motion.div>
+          <div className="card overflow-hidden p-2">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93245.63184717782!2d-81.32895606875188!3d42.98632343104216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef20eaee30000%3A0x4030ebaa8223060!2sLondon%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sca!4v1738281600000!5m2!1sen!2sca"
+              width="100%"
+              height="220"
+              className="block rounded-[1.1rem] border-0 opacity-80 [filter:invert(0.92)_hue-rotate(180deg)_saturate(0.6)]"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="London, Ontario, Canada — map"
+            />
           </div>
 
-          <div className="flex-1 w-full max-w-[700px] mx-auto xl:mx-0">
-            <motion.h2
-              variants={fadeIn("up", 0.35)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className="text-lg font-semibold mb-6 text-center xl:text-left"
-            >
-              Contact form
-            </motion.h2>
+          <Socials className="pt-2" />
+        </motion.div>
 
-            {sent ? (
-              <motion.div
-                variants={fadeIn("up", 0.4)}
-                initial="hidden"
-                animate="show"
-                className="rounded-lg border border-accent/40 bg-white/5 p-8 text-center"
+        {/* Right: form */}
+        <motion.div
+          variants={fadeIn("up", 0.18)}
+          initial="hidden"
+          animate="show"
+          className="card order-first p-6 sm:p-10 lg:order-none lg:col-span-7"
+        >
+          <h2 className="text-xl font-semibold text-white">Send a message</h2>
+          <p className="mt-1 text-sm">All fields are required.</p>
+
+          {sent ? (
+            <div
+              role="status"
+              className="mt-8 flex flex-col items-center rounded-2xl border border-emerald-400/20 bg-emerald-400/[0.06] px-6 py-12 text-center"
+            >
+              <HiCheckCircle aria-hidden className="text-5xl text-emerald-400" />
+              <p className="mt-4 text-lg font-medium text-white">
+                Message sent successfully.
+              </p>
+              <p className="mt-1 text-sm">
+                Thank you — I&apos;ll get back to you as soon as possible.
+              </p>
+              <button
+                type="button"
+                className="btn-ghost mt-8"
+                onClick={() => setSent(false)}
               >
-                <p className="text-accent font-medium mb-2">
-                  Message sent successfully.
-                </p>
-                <p className="text-white/70 text-sm mb-6">
-                  Thank you — I&apos;ll get back to you as soon as possible.
-                </p>
-                <button
-                  type="button"
-                  className="btn rounded-full border border-white/50 px-8 py-3 hover:border-accent transition-colors"
-                  onClick={() => setSent(false)}
-                >
-                  Send another message
-                </button>
-              </motion.div>
-            ) : (
-              <motion.form
-                variants={fadeIn("up", 0.4)}
-                initial="hidden"
-                animate="show"
-                exit="hidden"
-                className="flex-1 flex flex-col gap-6 w-full mx-auto"
-                onSubmit={handleSubmit}
-                autoComplete="on"
-              >
-                <div className="flex flex-col sm:flex-row gap-6 w-full">
+                Send another message
+              </button>
+            </div>
+          ) : (
+            <form
+              className="mt-8 flex flex-col gap-5"
+              onSubmit={handleSubmit}
+              autoComplete="on"
+            >
+              <input
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden
+                className="hidden"
+              />
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="fullname" className="field-label">
+                    Full name
+                  </label>
                   <input
                     type="text"
                     name="fullname"
                     id="fullname"
-                    placeholder="Full name"
-                    className="input flex-1"
+                    autoComplete="name"
+                    placeholder="Jane Cooper"
+                    className="input"
                     disabled={isLoading}
                     required
-                    aria-required
                   />
+                </div>
+                <div>
+                  <label htmlFor="email" className="field-label">
+                    Email
+                  </label>
                   <input
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Email address"
-                    className="input flex-1"
+                    autoComplete="email"
+                    placeholder="jane@company.com"
+                    className="input"
                     disabled={isLoading}
                     required
-                    aria-required
                   />
                 </div>
+              </div>
+              <div>
+                <label htmlFor="message" className="field-label">
+                  Message
+                </label>
                 <textarea
                   name="message"
                   id="message"
-                  placeholder="Your message"
-                  className="textarea min-h-[160px]"
+                  placeholder="A few lines about the project, timeline and budget…"
+                  className="textarea"
                   disabled={isLoading}
                   required
-                  aria-required
                 />
-                {error && (
-                  <p role="alert" className="text-sm text-red-400 -mt-2">
-                    {error}
-                  </p>
-                )}
-                <button
-                  type="submit"
-                  className="btn rounded-full border border-white/50 max-w-[200px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
-                  disabled={isLoading}
-                  aria-disabled={isLoading}
-                >
-                  <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
-                    {isLoading ? "Sending…" : "Send message"}
-                  </span>
-                  <BsArrowRight
-                    className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]"
-                    aria-hidden
-                  />
-                </button>
-              </motion.form>
-            )}
-          </div>
-        </div>
+              </div>
+              {error && (
+                <p role="alert" className="text-sm text-red-400">
+                  {error}
+                </p>
+              )}
+              <button
+                type="submit"
+                className="btn-primary group w-full sm:w-auto sm:self-start"
+                disabled={isLoading}
+              >
+                {isLoading ? "Sending…" : "Send message"}
+                <HiArrowRight
+                  aria-hidden
+                  className="transition-transform group-hover:translate-x-0.5"
+                />
+              </button>
+            </form>
+          )}
+        </motion.div>
       </div>
     </div>
   );

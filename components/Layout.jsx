@@ -1,10 +1,10 @@
-import { Sora } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
-import TopLeftImg from "../components/TopLeftImg";
 import {
   OG_IMAGE_HEIGHT,
   OG_IMAGE_WIDTH,
@@ -13,10 +13,22 @@ import {
 } from "../lib/seo";
 import { personJsonLd, siteMeta, websiteJsonLd } from "../lib/site";
 
-const sora = Sora({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-sora",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-geist",
+  display: "swap",
+});
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: "400",
+  style: "italic",
+  display: "swap",
 });
 
 const Layout = ({ children }) => {
@@ -28,8 +40,8 @@ const Layout = ({ children }) => {
     : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
   return (
-    <main
-      className={`page flex min-h-0 flex-col bg-site text-white bg-cover bg-no-repeat ${sora.variable} font-sora relative`}
+    <div
+      className={`${geist.variable} ${geistMono.variable} ${serif.variable} relative flex min-h-screen flex-col font-sans`}
     >
       <Head key={router.pathname}>
         <title>{seo.title}</title>
@@ -76,14 +88,26 @@ const Layout = ({ children }) => {
         />
       </Head>
 
-      <TopLeftImg />
-      <Nav />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink-950"
+      >
+        Skip to content
+      </a>
+      <div aria-hidden className="site-backdrop" />
       <Header />
 
-      <div className="relative z-[1] flex min-h-0 flex-1 flex-col overflow-y-auto overflow-x-hidden overscroll-y-contain max-xl:pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]">
+      <main
+        id="main"
+        tabIndex={-1}
+        className="relative z-[1] flex-1 overflow-x-clip focus:outline-none focus-visible:ring-0"
+      >
         {children}
-      </div>
-    </main>
+      </main>
+
+      <Footer />
+      <Nav />
+    </div>
   );
 };
 

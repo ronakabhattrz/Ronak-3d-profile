@@ -69,7 +69,6 @@
     "react-icons": "^4.8.0",
     "react-tsparticles": "^2.9.3",
     "rss-parser": "^3.13.0",
-    "swiper": "^12.1.2",
     "tailwind-scrollbar": "^3.0.4",
     "tsparticles": "^2.9.3"
   },

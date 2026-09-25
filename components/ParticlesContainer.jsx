@@ -1,14 +1,22 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Particles } from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 const ParticlesContainer = () => {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    setEnabled(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
   // init
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
 
   const particlesLoaded = useCallback(async () => {}, []);
+
+  if (!enabled) return null;
 
   return (
     <Particles
@@ -48,13 +56,13 @@ const ParticlesContainer = () => {
         },
         particles: {
           color: {
-            value: "#e68e2e",
+            value: "#ffffff",
           },
           links: {
-            color: "#f5d393",
+            color: "#F13024",
             distance: 150,
             enable: true,
-            opacity: 0.5,
+            opacity: 0.22,
             width: 1,
           },
           collisions: {
@@ -67,7 +75,7 @@ const ParticlesContainer = () => {
               default: "bounce",
             },
             random: false,
-            speed: 1,
+            speed: 0.6,
             straight: false,
           },
           number: {
@@ -75,10 +83,10 @@ const ParticlesContainer = () => {
               enable: true,
               area: 800,
             },
-            value: 50,
+            value: 40,
           },
           opacity: {
-            value: 0.5,
+            value: 0.35,
           },
           shape: {
             type: "circle",
@@ -86,7 +94,7 @@ const ParticlesContainer = () => {
           size: {
             value: {
               min: 1,
-              max: 5,
+              max: 2.5,
             },
           },
         },

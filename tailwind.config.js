@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  future: {
+    // Only apply `hover:` styles on devices that can actually hover
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,8 +14,11 @@ module.exports = {
   ],
   theme: {
     container: {
+      center: true,
       padding: {
-        DEFAULT: "15px",
+        DEFAULT: "1.25rem",
+        sm: "1.5rem",
+        lg: "2rem",
       },
     },
     screens: {
@@ -22,28 +29,47 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: "#131424",
-        secondary: "#393A47",
+        /** Deep ink surfaces — layered from page background up to raised cards */
+        ink: {
+          950: "#070709",
+          900: "#0b0b0f",
+          850: "#101015",
+          800: "#15151b",
+          700: "#1d1d25",
+        },
+        primary: "#0b0b0f",
+        secondary: "#15151b",
+        /** Matches the dot in the logo */
         accent: "#F13024",
       },
-      backgroundImage: {
-        explosion: 'url("/bg-explosion.png")',
-        circles: 'url("/bg-circles.png")',
-        circleStar: 'url("/circle-star.svg")',
-        site: 'url("/site-bg.svg")',
+      maxWidth: {
+        content: "1200px",
       },
       animation: {
         "spin-slow": "spin 6s linear infinite",
+        marquee: "marquee 40s linear infinite",
+        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "pulse-dot": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(52, 211, 153, 0.55)" },
+          "50%": { boxShadow: "0 0 0 6px rgba(52, 211, 153, 0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
       },
       fontFamily: {
-        poppins: [`var(--font-poppins)`, "sans-serif"],
-        sora: [`var(--font-sora)`, "sans-serif"],
+        sans: [`var(--font-geist)`, "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: [`var(--font-geist-mono)`, "ui-monospace", "monospace"],
+        serif: [`var(--font-serif)`, "ui-serif", "Georgia", "serif"],
       },
-    },
-  },
-  container: {
-    padding: {
-      DEFAULT: "15px",
     },
   },
   plugins: [require("tailwind-scrollbar")],

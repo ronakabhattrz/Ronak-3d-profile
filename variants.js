@@ -1,15 +1,10 @@
+/** Entrance animation: short, soft offset with an ease-out curve. */
 export const fadeIn = (direction, delay) => {
   return {
     hidden: {
-      y: direction === "up" ? 80 : direction === "down" ? -80 : 0,
+      y: direction === "up" ? 24 : direction === "down" ? -24 : 0,
+      x: direction === "left" ? 24 : direction === "right" ? -24 : 0,
       opacity: 0,
-      x: direction === "left" ? 80 : direction === "right" ? -80 : 0,
-      transition: {
-        type: "tween",
-        duration: 0.6,
-        delay: delay,
-        ease: [0.25, 0.6, 0.3, 0.8],
-      },
     },
     show: {
       y: 0,
@@ -17,9 +12,9 @@ export const fadeIn = (direction, delay) => {
       opacity: 1,
       transition: {
         type: "tween",
-        duration: 0.65,
+        duration: 0.7,
         delay: delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };

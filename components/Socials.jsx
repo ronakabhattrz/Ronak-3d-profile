@@ -1,16 +1,12 @@
-import Link from "next/link";
-
 import { siteMeta } from "../lib/site";
 import {
   RiFacebookCircleLine,
   RiGithubLine,
-  RiGlobalLine,
   RiInstagramLine,
   RiLinkedinLine,
   RiMailLine,
   RiMediumLine,
   RiTwitterXLine,
-  RiYoutubeLine,
 } from "react-icons/ri";
 
 export const socialData = [
@@ -18,89 +14,65 @@ export const socialData = [
     name: "LinkedIn",
     link: "https://www.linkedin.com/in/ronakabhattrz",
     Icon: RiLinkedinLine,
-    highlight: true,
     kind: "external",
   },
   {
     name: "GitHub",
     link: "https://github.com/ronakabhattrz",
     Icon: RiGithubLine,
-    highlight: false,
     kind: "external",
   },
   {
     name: "Medium",
     link: siteMeta.mediumUrl,
     Icon: RiMediumLine,
-    highlight: false,
     kind: "external",
   },
   {
     name: "Twitter",
     link: "https://twitter.com/ronakabhattrz",
     Icon: RiTwitterXLine,
-    highlight: false,
     kind: "external",
   },
   {
     name: "Instagram",
     link: "https://www.instagram.com/ronakbhattrz/",
     Icon: RiInstagramLine,
-    highlight: false,
     kind: "external",
   },
   {
     name: "Facebook",
     link: "https://www.facebook.com/RonakbhattRz",
     Icon: RiFacebookCircleLine,
-    highlight: false,
     kind: "external",
   },
   {
     name: "Email",
     link: "mailto:ronakabhattrz@gmail.com",
     Icon: RiMailLine,
-    highlight: false,
     kind: "mailto",
   },
 ];
 
-const linkClass = (highlight) =>
-  `${
-    highlight
-      ? "bg-accent rounded-full p-[5px] hover:text-white"
-      : "hover:text-accent"
-  } transition-all duration-300`;
-
-const Socials = () => {
+const Socials = ({ className = "" }) => {
   return (
-    <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-4 gap-y-2 text-base xl:text-lg max-w-[340px] lg:max-w-none">
-      {socialData.map((social, i) =>
-        social.kind === "mailto" ? (
+    <ul className={`flex flex-wrap items-center gap-2 ${className}`}>
+      {socialData.map((social) => (
+        <li key={social.name}>
           <a
-            key={i}
             title={social.name}
             href={social.link}
-            className={linkClass(social.highlight)}
+            {...(social.kind === "external"
+              ? { target: "_blank", rel: "noreferrer noopener" }
+              : {})}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-lg text-zinc-400 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-accent/10 hover:text-white"
           >
             <social.Icon aria-hidden />
             <span className="sr-only">{social.name}</span>
           </a>
-        ) : (
-          <Link
-            key={i}
-            title={social.name}
-            href={social.link}
-            target="_blank"
-            rel="noreferrer noopener"
-            className={linkClass(social.highlight)}
-          >
-            <social.Icon aria-hidden />
-            <span className="sr-only">{social.name}</span>
-          </Link>
-        )
-      )}
-    </div>
+        </li>
+      ))}
+    </ul>
   );
 };
 
