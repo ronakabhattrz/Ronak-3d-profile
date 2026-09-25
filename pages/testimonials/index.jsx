@@ -1,12 +1,15 @@
 import { HiArrowUpRight, HiStar } from "react-icons/hi2";
 
+import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
 import TestimonialWall from "../../components/TestimonialWall";
 import { testimonialData, upworkProfileUrl } from "../../data/testimonials";
+import { breadcrumbJsonLd } from "../../lib/schema";
 
 const Testimonials = () => {
   return (
     <div className="container max-w-content">
+      <JsonLd id="testimonials" data={breadcrumbJsonLd("/testimonials", "Testimonials")} />
       <PageHeader
         eyebrow="Testimonials"
         title={

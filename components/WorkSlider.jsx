@@ -7,7 +7,7 @@ import { fadeIn } from "../variants";
 /**
  * Thumbnails: add files under /public/projects/ (see path per item).
  */
-const portfolioItems = [
+export const portfolioItems = [
   {
     title: "All Pro IFM",
     path: "/projects/all-pro-ifm.jpg",

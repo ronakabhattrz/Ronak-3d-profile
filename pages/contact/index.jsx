@@ -10,9 +10,11 @@ import {
   HiOutlinePhone,
 } from "react-icons/hi2";
 
+import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
 import Socials from "../../components/Socials";
 import { fadeIn } from "../../variants";
+import { breadcrumbJsonLd, contactPageJsonLd } from "../../lib/schema";
 import { siteMeta } from "../../lib/site";
 
 const channels = [
@@ -80,6 +82,9 @@ const Contact = () => {
       });
 
       if (res.ok) {
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", { method: "contact_form" });
+        }
         setSent(true);
         form.reset();
       } else {
@@ -97,6 +102,10 @@ const Contact = () => {
 
   return (
     <div className="container max-w-content">
+      <JsonLd
+        id="contact"
+        data={[breadcrumbJsonLd("/contact", "Contact"), contactPageJsonLd()]}
+      />
       <PageHeader
         eyebrow="Contact"
         title={

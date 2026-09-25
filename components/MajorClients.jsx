@@ -3,15 +3,14 @@ import Image from "next/image";
 
 import { fadeIn } from "../variants";
 
-/** Logos in /public — same set as ronakbhatt.in “Major clients”
- *  Update `name` with the real company name for each logo file. */
+/** Logos in /public — same set as ronakbhatt.in “Major clients”. */
 const clients = [
-  { src: "/logo-1-color.png", name: "Major client" },
-  { src: "/logo-2-color.svg", name: "Major client" },
-  { src: "/logo-3-color.png", name: "Major client" },
-  { src: "/logo-4-color.png", name: "Major client" },
-  { src: "/logo-5-color.png", name: "Major client" },
-  { src: "/logo-6-color.png", name: "Major client" },
+  { src: "/logo-1-color.png", name: "Upwork" },
+  { src: "/logo-2-color.svg", name: "Bulletproof Cyber Security" },
+  { src: "/logo-3-color.png", name: "All Pro IFM" },
+  { src: "/logo-4-color.png", name: "Auto Service Haarlem" },
+  { src: "/logo-5-color.png", name: "MBMotion.nl" },
+  { src: "/logo-6-color.png", name: "HPPC" },
 ];
 
 const MajorClients = () => {

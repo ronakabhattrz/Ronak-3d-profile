@@ -2,8 +2,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { HiArrowUpRight } from "react-icons/hi2";
 
+import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
 import { getMediumPosts } from "../../lib/mediumFeed";
+import { blogJsonLd, breadcrumbJsonLd } from "../../lib/schema";
 import { siteMeta } from "../../lib/site";
 import { fadeIn } from "../../variants";
 
@@ -29,6 +31,10 @@ function formatDate(isoOrRfc) {
 const Blog = ({ posts }) => {
   return (
     <div className="container max-w-content">
+      <JsonLd
+        id="blog"
+        data={[breadcrumbJsonLd("/blog", "Blog"), blogJsonLd(posts)]}
+      />
       <PageHeader
         eyebrow="Writing"
         title={

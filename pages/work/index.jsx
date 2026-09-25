@@ -1,10 +1,16 @@
+import JsonLd from "../../components/JsonLd";
 import PageHeader from "../../components/PageHeader";
 import UpworkProjectCatalog from "../../components/UpworkProjectCatalog";
-import WorkSlider from "../../components/WorkSlider";
+import WorkSlider, { portfolioItems } from "../../components/WorkSlider";
+import { breadcrumbJsonLd, portfolioJsonLd } from "../../lib/schema";
 
 const Work = () => {
   return (
     <div className="container max-w-content">
+      <JsonLd
+        id="work"
+        data={[breadcrumbJsonLd("/work", "Work"), portfolioJsonLd(portfolioItems)]}
+      />
       <PageHeader
         eyebrow="Portfolio"
         title={
