@@ -56,8 +56,13 @@ const transcriptOf = (messages) =>
 let client;
 
 export default async function handler(req, res) {
+  // Lets the widget hide itself when no API key is configured
+  if (req.method === "GET") {
+    res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
+    return res.status(200).json({ enabled: Boolean(process.env.ANTHROPIC_API_KEY) });
+  }
   if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
+    res.setHeader("Allow", "GET, POST");
     return res.status(405).json({ error: "Method not allowed" });
   }
   if (!process.env.ANTHROPIC_API_KEY) {

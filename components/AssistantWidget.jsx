@@ -73,6 +73,7 @@ function Linkified({ text }) {
 
 const AssistantWidget = () => {
   const { pathname } = useRouter();
+  const [enabled, setEnabled] = useState(false);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([GREETING]);
   const [leadCaptured, setLeadCaptured] = useState(false);
@@ -81,6 +82,13 @@ const AssistantWidget = () => {
   const [error, setError] = useState("");
   const listRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    fetch("/api/chat")
+      .then((r) => (r.ok ? r.json() : { enabled: false }))
+      .then((d) => setEnabled(Boolean(d.enabled)))
+      .catch(() => setEnabled(false));
+  }, []);
 
   useEffect(() => {
     const saved = load();
@@ -152,6 +160,9 @@ const AssistantWidget = () => {
   };
 
   const showSuggestions = messages.length === 1 && !pending;
+
+  // No API key configured: show nothing rather than a chat that can't answer
+  if (!enabled) return null;
 
   return (
     <>
