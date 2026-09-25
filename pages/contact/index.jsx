@@ -56,6 +56,13 @@ const Contact = () => {
     const fullname = form.fullname.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
+    // Honeypot: real users never see or fill this field
+    if (form._gotcha.value) {
+      setIsLoading(false);
+      setSent(true);
+      form.reset();
+      return;
+    }
 
     try {
       const res = await fetch(`https://formspree.io/f/${siteMeta.formspreeId}`, {
@@ -120,7 +127,7 @@ const Contact = () => {
                     <Icon aria-hidden />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-400">
                       {label}
                     </span>
                     <span className="block truncate text-[15px] text-white">
@@ -130,7 +137,7 @@ const Contact = () => {
                   {href ? (
                     <HiArrowUpRight
                       aria-hidden
-                      className="shrink-0 text-zinc-600 transition-colors group-hover:text-accent"
+                      className="shrink-0 text-zinc-500 transition-colors group-hover:text-accent"
                     />
                   ) : null}
                 </>
@@ -208,6 +215,14 @@ const Contact = () => {
               onSubmit={handleSubmit}
               autoComplete="on"
             >
+              <input
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden
+                className="hidden"
+              />
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="fullname" className="field-label">

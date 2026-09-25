@@ -135,7 +135,7 @@ const Home = () => {
               <li
                 key={`${tech}-${i}`}
                 aria-hidden={i >= stackTicker.length}
-                className="flex items-center gap-10 whitespace-nowrap font-mono text-sm uppercase tracking-[0.16em] text-zinc-500"
+                className="flex items-center gap-10 whitespace-nowrap font-mono text-sm uppercase tracking-[0.16em] text-zinc-400"
               >
                 {tech}
                 <span className="h-1 w-1 rounded-full bg-accent/70" />

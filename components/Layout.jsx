@@ -27,7 +27,7 @@ const serif = Instrument_Serif({
   subsets: ["latin"],
   variable: "--font-serif",
   weight: "400",
-  style: ["normal", "italic"],
+  style: "italic",
   display: "swap",
 });
 
@@ -97,7 +97,11 @@ const Layout = ({ children }) => {
       <div aria-hidden className="site-backdrop" />
       <Header />
 
-      <main id="main" className="relative z-[1] flex-1 overflow-x-clip">
+      <main
+        id="main"
+        tabIndex={-1}
+        className="relative z-[1] flex-1 overflow-x-clip focus:outline-none focus-visible:ring-0"
+      >
         {children}
       </main>
 

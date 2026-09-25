@@ -81,7 +81,7 @@ const Nav = () => {
                 className={`flex flex-col items-center gap-1 rounded-xl py-2 text-[10px] font-medium capitalize transition-colors ${
                   active
                     ? "bg-white/[0.08] text-white"
-                    : "text-zinc-500 hover:text-zinc-200"
+                    : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
                 <Icon

@@ -41,12 +41,12 @@ const Footer = () => {
         <div className="flex flex-col gap-6 border-t border-white/[0.07] pt-8 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm text-zinc-300">Ronak Bhatt</p>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-400">
               Full-stack developer · London, Ontario
             </p>
           </div>
           <nav aria-label="Footer" className="hidden lg:block">
-            <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-400">
               {navData.map((item) => (
                 <li key={item.path}>
                   <Link
@@ -61,7 +61,7 @@ const Footer = () => {
           </nav>
           <Socials />
         </div>
-        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-600">
+        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">
           © {new Date().getFullYear()} Ronak Bhatt. Built with Next.js.
         </p>
       </div>

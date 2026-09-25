@@ -26,7 +26,7 @@ const TestimonialWall = () => {
                 <p className="truncate text-sm font-medium text-white">
                   {person.name}
                 </p>
-                <p className="truncate text-xs text-zinc-500">
+                <p className="truncate text-xs text-zinc-400">
                   {person.position}
                   {person.source ? (
                     <span className="text-accent"> · {person.source}</span>

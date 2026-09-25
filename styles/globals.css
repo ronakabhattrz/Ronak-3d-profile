@@ -9,7 +9,6 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
     color-scheme: dark;
   }
   body {
@@ -85,7 +84,7 @@
   }
   .input,
   .textarea {
-    @apply w-full rounded-2xl border border-white/10 bg-ink-900/80 px-4 text-[15px] text-white outline-none transition-colors placeholder:text-zinc-600 hover:border-white/20 focus:border-accent/70 focus:ring-4 focus:ring-accent/15 disabled:opacity-60;
+    @apply w-full rounded-2xl border border-white/10 bg-ink-900/80 px-4 text-[15px] text-white outline-none transition-colors placeholder:text-zinc-500 hover:border-white/20 focus:border-accent/70 focus:ring-4 focus:ring-accent/15 disabled:opacity-60;
   }
   .input {
     @apply h-12;

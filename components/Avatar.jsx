@@ -25,7 +25,6 @@ const Avatar = ({ className = "", priority = false, showChips = true }) => {
           alt="Ronak Bhatt"
           fill
           priority={priority}
-          fetchPriority={priority ? "high" : undefined}
           quality={82}
           sizes="(max-width: 640px) 90vw, 460px"
           className="object-cover object-[50%_15%] translate-z-0 [mask-image:linear-gradient(to_bottom,#000_75%,transparent)]"
@@ -35,13 +34,13 @@ const Avatar = ({ className = "", priority = false, showChips = true }) => {
       {showChips ? (
         <>
           <div className="absolute -left-3 top-[18%] animate-float rounded-2xl border border-white/10 bg-ink-900/85 px-4 py-3 shadow-2xl backdrop-blur-xl sm:-left-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-400">
               Upwork
             </p>
             <p className="text-sm font-medium text-white">Top Rated Plus</p>
           </div>
           <div className="absolute -right-3 bottom-[14%] animate-float rounded-2xl border border-white/10 bg-ink-900/85 px-4 py-3 shadow-2xl backdrop-blur-xl [animation-delay:-3s] sm:-right-8">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-400">
               Currently
             </p>
             <p className="text-sm font-medium text-white">

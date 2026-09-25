@@ -83,7 +83,11 @@ const WorkSlider = () => {
           >
             <div
               className={`relative w-full overflow-hidden rounded-[1.1rem] bg-ink-800 ${
-                isWide(i, portfolioItems.length) ? "aspect-[16/10]" : "aspect-[4/3]"
+                isWide(i, portfolioItems.length)
+                  ? "aspect-[16/10]"
+                  : spanClass(i, portfolioItems.length) === "lg:col-span-6"
+                    ? "aspect-[4/3] lg:aspect-[21/9]"
+                    : "aspect-[4/3]"
               }`}
             >
               <Image
@@ -108,7 +112,7 @@ const WorkSlider = () => {
                 <h3 className="truncate text-base font-semibold text-white">
                   {item.title}
                 </h3>
-                <p className="truncate font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
+                <p className="truncate font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-400">
                   {hostOf(item.link)}
                 </p>
               </div>

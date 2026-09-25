@@ -121,7 +121,7 @@ const Blog = ({ posts }) => {
                       {formatDate(post.pubDate) ? (
                         <time
                           dateTime={post.pubDate}
-                          className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-500"
+                          className="font-mono text-[11px] uppercase tracking-[0.16em] text-zinc-400"
                         >
                           {formatDate(post.pubDate)}
                         </time>

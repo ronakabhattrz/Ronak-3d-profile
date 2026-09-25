@@ -96,7 +96,7 @@ const Services = () => {
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-2xl text-accent transition-colors group-hover:border-accent/40 group-hover:bg-accent/10">
                 <item.Icon aria-hidden />
               </span>
-              <span className="font-mono text-xs text-zinc-600">
+              <span className="font-mono text-xs text-zinc-500">
                 {String(i + 1).padStart(2, "0")}
               </span>
             </div>

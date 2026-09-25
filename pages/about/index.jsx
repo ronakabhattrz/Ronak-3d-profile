@@ -187,7 +187,7 @@ const About = () => {
         </motion.div>
 
         <motion.div {...reveal(0.08)} className="lg:col-span-5">
-          <Avatar showChips={false} className="max-w-none" />
+          <Avatar showChips={false} />
         </motion.div>
       </div>
 
@@ -234,7 +234,7 @@ const About = () => {
                         <span className="font-normal text-zinc-400"> · {company}</span>
                       ) : null}
                     </h3>
-                    <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500">
+                    <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-400">
                       {when}
                     </span>
                   </div>
@@ -296,7 +296,7 @@ const About = () => {
               {block.items.map((item) => (
                 <li key={item.title} className="flex items-start justify-between gap-4 py-4 first:pt-0 last:pb-0">
                   <span className="text-[15px] leading-snug text-zinc-200">{item.title}</span>
-                  <span className="shrink-0 text-right font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-500">
+                  <span className="shrink-0 text-right font-mono text-[11px] uppercase tracking-[0.12em] text-zinc-400">
                     {item.stage}
                   </span>
                 </li>

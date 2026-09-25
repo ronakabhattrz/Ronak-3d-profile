@@ -1,14 +1,22 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Particles } from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 const ParticlesContainer = () => {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    setEnabled(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
   // init
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
 
   const particlesLoaded = useCallback(async () => {}, []);
+
+  if (!enabled) return null;
 
   return (
     <Particles

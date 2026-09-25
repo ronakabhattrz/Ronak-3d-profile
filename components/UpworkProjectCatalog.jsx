@@ -54,7 +54,7 @@ const UpworkProjectCatalog = () => {
                 ) : null}
 
                 <div className="mt-auto flex items-center justify-between gap-3 pt-6">
-                  <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-zinc-400">
                     <HiOutlineClock className="text-base" aria-hidden />
                     {item.deliveryLabel}
                   </span>
